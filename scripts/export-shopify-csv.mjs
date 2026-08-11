@@ -112,6 +112,36 @@ for (const p of products) {
   })
 }
 
+// ---------- sanity check: bigger sizes must not cost less ----------
+// A larger vial priced below a smaller one is almost always a typo, and it
+// lets a customer buy more product for less money. Refuse to write the file.
+const numeric = (label) => {
+  const m = label.match(/([\d.]+)/)
+  return m ? Number(m[1]) : null
+}
+const problems = []
+for (const p of products) {
+  const sized = p.sizes
+    .map((s) => ({ ...s, qty: numeric(s.label) }))
+    .filter((s) => s.qty !== null)
+    .sort((a, b) => a.qty - b.qty)
+  for (let i = 1; i < sized.length; i++) {
+    if (sized[i].price <= sized[i - 1].price) {
+      problems.push(
+        `${p.name}: ${sized[i].label} (₹${sized[i].price}) is not more than ` +
+        `${sized[i - 1].label} (₹${sized[i - 1].price})`
+      )
+    }
+  }
+}
+if (problems.length) {
+  console.error("\n✖ Refusing to write CSV — inverted pricing detected:\n")
+  for (const t of problems) console.error(`    ${t}`)
+  console.error("\n  A bigger size must cost more than a smaller one.")
+  console.error("  Fix the prices in lib/data.ts and re-run.\n")
+  process.exit(1)
+}
+
 fs.writeFileSync(OUT, rows.join("\n") + "\n", "utf8")
 
 // ---------- report ----------
