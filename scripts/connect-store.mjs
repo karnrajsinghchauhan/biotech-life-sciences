@@ -94,12 +94,38 @@ async function check(domain, token) {
   return { ok: true, shop: j.data.shop, products: j.data.products.edges.map((e) => e.node) }
 }
 
+/** Read --flag value / --flag=value from argv. */
+function arg(name) {
+  const i = process.argv.indexOf(`--${name}`)
+  if (i !== -1 && process.argv[i + 1] && !process.argv[i + 1].startsWith("--")) {
+    return process.argv[i + 1]
+  }
+  const inline = process.argv.find((a) => a.startsWith(`--${name}=`))
+  return inline ? inline.slice(name.length + 3) : null
+}
+
 ;(async () => {
   console.log("\n── Connect your Shopify store ──────────────────────\n")
-  console.log("  Shopify admin → Settings → Apps and sales channels →")
-  console.log("  Develop apps → your app → Storefront API → Install app.\n")
 
-  const rawDomain = await ask("  Store domain (e.g. my-store.myshopify.com): ")
+  // Non-interactive path: flags or environment. Falls back to prompting.
+  const argDomain = arg("domain") || process.env.SHOPIFY_STORE_DOMAIN_INPUT
+  const argToken = arg("token") || process.env.SHOPIFY_STOREFRONT_TOKEN_INPUT
+
+  if (!argDomain || !argToken) {
+    console.log("  Shopify admin → Settings → Apps and sales channels →")
+    console.log("  Develop apps → your app → Storefront API → Install app.\n")
+    if (!process.stdin.isTTY) {
+      console.log("  ✖ No terminal available for prompts, and no values supplied.\n")
+      console.log("    Run it with both values instead:\n")
+      console.log("      node scripts/connect-store.mjs \\")
+      console.log("        --domain your-store.myshopify.com \\")
+      console.log("        --token your_storefront_token\n")
+      rl.close()
+      process.exit(1)
+    }
+  }
+
+  const rawDomain = argDomain || (await ask("  Store domain (e.g. my-store.myshopify.com): "))
   const domain = normaliseDomain(rawDomain)
   if (!domain.endsWith(".myshopify.com")) {
     console.log(`\n  ✖ "${domain}" doesn't look like a myshopify.com domain.`)
@@ -109,7 +135,7 @@ async function check(domain, token) {
   }
   console.log(`    → ${domain}`)
 
-  const token = await askSecret("  Storefront API access token (hidden): ")
+  const token = argToken || (await askSecret("  Storefront API access token (hidden): "))
   if (!token) {
     console.log("\n  ✖ No token entered.\n")
     rl.close()
