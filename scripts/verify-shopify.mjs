@@ -36,11 +36,39 @@ const ADMIN = env.SHOPIFY_ADMIN_ACCESS_TOKEN
 const mark = (ok) => (ok ? "✓" : "✖")
 const VERCEL_PROVISIONED = /^vercel-store-/
 
+// Diagnostic: which keys appear, how often, and which line wins.
+// Prints key names and line numbers only — never values.
+function keyDiagnostics() {
+  if (!fs.existsSync(envPath)) return []
+  const lines = fs.readFileSync(envPath, "utf8").split("\n")
+  const seen = new Map()
+  lines.forEach((l, i) => {
+    if (!l.trim() || l.startsWith("#")) return
+    const eq = l.indexOf("=")
+    if (eq < 1) return
+    const key = l.slice(0, eq).trim()
+    if (!/^[A-Z0-9_]+$/.test(key)) return
+    if (!seen.has(key)) seen.set(key, [])
+    seen.get(key).push(i + 1)
+  })
+  return [...seen.entries()]
+}
+
 console.log("\n── Shopify connection ──────────────────────────────\n")
 console.log(`  .env.local          ${mark(fs.existsSync(envPath))} ${fs.existsSync(envPath) ? "found" : "MISSING"}`)
 console.log(`  STORE_DOMAIN        ${mark(!!DOMAIN)} ${DOMAIN || "not set"}`)
 console.log(`  STOREFRONT token    ${mark(!!STOREFRONT)} ${STOREFRONT ? "present" : "not set"}`)
 console.log(`  ADMIN token         ${mark(!!ADMIN)} ${ADMIN ? "present" : "not set (needed only for seeding)"}`)
+
+const diag = keyDiagnostics()
+console.log(`\n  Keys found in .env.local (${diag.length}):`)
+for (const [key, lineNums] of diag) {
+  const dup = lineNums.length > 1 ? `  ⚠ ${lineNums.length}× on lines ${lineNums.join(", ")} — last wins` : ``
+  console.log(`    ${key.padEnd(34)} line ${lineNums[lineNums.length - 1]}${dup}`)
+}
+if (!diag.some(([k]) => k === "SHOPIFY_ADMIN_ACCESS_TOKEN")) {
+  console.log(`\n  → SHOPIFY_ADMIN_ACCESS_TOKEN is absent from this file entirely.`)
+}
 
 if (DOMAIN && VERCEL_PROVISIONED.test(DOMAIN)) {
   console.log(

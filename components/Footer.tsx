@@ -25,6 +25,7 @@ export default function Footer() {
           <div>
             <h4>Shop</h4>
             <ul>
+              <li><Link href="/shop">Shop</Link></li>
               <li><Link href="/products">All Products</Link></li>
               <li><Link href="/categories/tissue-repair">Tissue Repair</Link></li>
               <li><Link href="/categories/dermal">Dermal Research</Link></li>

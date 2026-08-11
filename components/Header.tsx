@@ -8,6 +8,7 @@ import { regions } from "@/lib/config"
 import SearchOverlay from "./SearchOverlay"
 
 const NAV = [
+  { href: "/shop", label: "Shop" },
   { href: "/products", label: "Products" },
   { href: "/categories", label: "Research Areas" },
   { href: "/coa", label: "COAs" },
