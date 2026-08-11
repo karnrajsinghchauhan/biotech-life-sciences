@@ -107,7 +107,7 @@ function readCatalogue() {
     const alt = rest.match(/altName:\s*"([^"]+)"/)?.[1] ?? null
     const type = rest.match(/compoundType:\s*"([^"]+)"/)?.[1] ?? "Peptide"
     const overview = rest.match(/overview:\s*"((?:[^"\\]|\\.)*)"/)?.[1]?.replace(/\\"/g, '"') ?? ""
-    const sizes = [...rest.matchAll(/\{\s*label:\s*"([^"]+)",\s*price:\s*(\d+)\s*\}/g)]
+    const sizes = [...rest.matchAll(/\{\s*label:\s*"([^"]+)",\s*price:\s*([\d.]+)\s*\}/g)]
       .map((s) => ({ label: s[1], price: Number(s[2]) }))
     const purity = rest.match(/purity:\s*"([^"]+)"/)?.[1] ?? "≥ 98% (RP-HPLC)"
     out.push({ slug, sku, code, image, name, alt, type, overview, sizes, purity })

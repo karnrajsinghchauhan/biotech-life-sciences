@@ -101,7 +101,7 @@ export const products: Product[] = [
   {
     slug: "retatrutide", sku: "BTLS-601", code: "RT10", image: "/images/products/retatrutide.webp", name: "Retatrutide",
     compoundType: "Peptide", category: "metabolic", categories: ["metabolic"],
-    sizes: [{ label: "5 mg", price: 5499 }, { label: "10 mg", price: 8999 }, { label: "20 mg", price: 14999 }],
+    sizes: [{ label: "5 mg", price: 7999 }, { label: "10 mg", price: 10000 }, { label: "20 mg", price: 15000 }],
     ...SPEC, featured: true, isNew: true, bestSeller: true,
     overview: "Retatrutide is a next-generation investigational peptide and triple agonist of the GIP, GLP-1 and glucagon receptors. It is used as a reference material in multi-receptor metabolic-signaling research, including studies on metabolism, energy balance and fat regulation.",
     research: ["Triple-agonist receptor pharmacology", "Metabolic regulation studies", "Energy-balance research", "Appetite-signaling research"],
@@ -110,7 +110,7 @@ export const products: Product[] = [
   {
     slug: "tirzepatide", sku: "BTLS-602", code: "TR10", image: "/images/products/tirzepatide.webp", name: "Tirzepatide",
     compoundType: "Peptide", category: "metabolic", categories: ["metabolic"],
-    sizes: [{ label: "5 mg", price: 4499 }, { label: "10 mg", price: 7499 }, { label: "20 mg", price: 12499 }],
+    sizes: [{ label: "5 mg", price: 6500 }, { label: "10 mg", price: 849.99 }, { label: "20 mg", price: 8500 }],
     ...SPEC, featured: true, bestSeller: true,
     overview: "Tirzepatide is a 39-amino-acid dual agonist of the GIP and GLP-1 receptors developed for advanced research applications. It supports investigations into metabolic regulation, glucose homeostasis and body composition in laboratory models.",
     research: ["Dual GIP/GLP-1 receptor pharmacology", "Glucose-metabolism studies", "Insulin-sensitivity research", "Weight-regulation models"],
@@ -119,7 +119,7 @@ export const products: Product[] = [
   {
     slug: "bpc-157-tb-500", sku: "BTLS-101", code: "BPCTB10", image: "/images/products/bpc-157-tb-500.webp", name: "BPC-157 + TB-500", altName: "Repair Blend",
     compoundType: "Peptide Blend", category: "tissue-repair", categories: ["tissue-repair", "connective"],
-    sizes: [{ label: "5 mg", price: 3499 }, { label: "10 mg", price: 5999 }, { label: "20 mg", price: 9999 }],
+    sizes: [{ label: "5 mg", price: 549.99 }, { label: "10 mg", price: 5999 }, { label: "20 mg", price: 11999 }],
     ...SPEC, featured: true, bestSeller: true,
     overview: "A research combination of two well-studied peptides — BPC-157 and TB-500 — widely used in laboratory research to explore healing processes, cellular regeneration and angiogenesis in preclinical models.",
     research: ["Tissue repair and regeneration models", "Wound-healing studies", "Angiogenesis research", "Cell-migration assays"],
@@ -128,7 +128,7 @@ export const products: Product[] = [
   {
     slug: "ghk-cu", sku: "BTLS-201", code: "CU50", image: "/images/products/ghk-cu.webp", name: "GHK-Cu", altName: "Copper Peptide",
     compoundType: "Peptide", category: "dermal", categories: ["dermal", "tissue-repair", "longevity"],
-    sizes: [{ label: "25 mg", price: 2499 }, { label: "50 mg", price: 3999 }, { label: "100 mg", price: 6499 }],
+    sizes: [{ label: "25 mg", price: 2499 }, { label: "50 mg", price: 6999 }, { label: "100 mg", price: 6499 }],
     ...SPEC, featured: true,
     overview: "GHK-Cu is a naturally occurring copper-binding tripeptide (glycyl-L-histidyl-L-lysine) studied for its regenerative properties in dermal-science literature — including collagen synthesis, skin remodeling, hair-follicle biology and tissue-repair research.",
     research: ["Collagen-synthesis studies", "Skin-remodeling research", "Hair-follicle biology", "Wound-repair models", "Gene-expression research"],
@@ -137,7 +137,7 @@ export const products: Product[] = [
   {
     slug: "hgh", sku: "BTLS-301", code: "HGH10", image: "/images/products/hgh.webp", name: "HGH", altName: "Human Growth Hormone (Somatropin)",
     compoundType: "Protein", category: "gh-performance", categories: ["gh-performance", "metabolic"],
-    sizes: [{ label: "5 IU", price: 2999 }, { label: "10 IU", price: 4999 }, { label: "20 IU", price: 8999 }],
+    sizes: [{ label: "5 IU", price: 2999 }, { label: "10 IU", price: 4999 }, { label: "20 IU", price: 109.99 }],
     ...SPEC, featured: true,
     overview: "Human Growth Hormone is a naturally occurring 191-amino-acid protein central to growth, cell regeneration and metabolic function. It is widely used in laboratory research to study growth processes, protein synthesis, fat metabolism and tissue repair.",
     research: ["Growth & development research", "Protein-synthesis studies", "Fat-metabolism and body-composition research", "GH-receptor signaling"],
@@ -146,7 +146,7 @@ export const products: Product[] = [
   {
     slug: "cjc-1295-no-dac", sku: "BTLS-302", code: "CND5", image: "/images/products/cjc-1295-no-dac.webp", name: "CJC-1295 No DAC", altName: "Mod GRF (1-29)",
     compoundType: "Peptide", category: "gh-performance", categories: ["gh-performance"],
-    sizes: [{ label: "5 mg", price: 2499 }, { label: "10 mg", price: 4299 }],
+    sizes: [{ label: "5 mg", price: 4499 }, { label: "10 mg", price: 6599 }],
     ...SPEC, featured: true,
     overview: "CJC-1295 No DAC is a synthetic Growth Hormone Releasing Hormone (GHRH) analogue widely utilized in laboratory research to investigate pulsatile growth hormone release, endocrine signaling and metabolic function. Its short-acting profile makes it a valuable tool for controlled scientific studies.",
     research: ["Pulsatile GH-release research", "GHRH-receptor signaling", "Endocrine and metabolic studies"],
@@ -155,7 +155,7 @@ export const products: Product[] = [
   {
     slug: "cjc-1295-dac", sku: "BTLS-303", code: "CD5", image: "/images/products/cjc-1295-with-dac.webp", name: "CJC-1295 With DAC",
     compoundType: "Peptide", category: "gh-performance", categories: ["gh-performance"],
-    sizes: [{ label: "5 mg", price: 2799 }, { label: "10 mg", price: 4799 }],
+    sizes: [{ label: "5 mg", price: 4999 }, { label: "10 mg", price: 7099 }],
     ...SPEC, featured: true,
     overview: "CJC-1295 With DAC is a long-acting GHRH analogue carrying a Drug Affinity Complex that extends its half-life, allowing prolonged stimulation of growth-hormone release in scientific research. It is widely used in laboratory studies focused on growth, recovery and body composition.",
     research: ["Long-acting GHRH pharmacology", "GH-secretion research", "Body-composition and metabolic studies"],
@@ -164,7 +164,7 @@ export const products: Product[] = [
   {
     slug: "ipamorelin", sku: "BTLS-304", code: "IP5", image: "/images/products/ipamorelin.webp", name: "Ipamorelin",
     compoundType: "Peptide", category: "gh-performance", categories: ["gh-performance"],
-    sizes: [{ label: "5 mg", price: 2299 }, { label: "10 mg", price: 3999 }],
+    sizes: [{ label: "5 mg", price: 3999 }, { label: "10 mg", price: 5999 }],
     ...SPEC, featured: true,
     overview: "Ipamorelin is a selective growth hormone secretagogue that stimulates GH release by mimicking ghrelin at the GHS-R1a receptor. It is widely used in laboratory research on growth-hormone release and is noted in the literature for its selectivity and minimal impact on cortisol and prolactin.",
     research: ["GHS-R1a receptor pharmacology", "GH-release research", "Secretagogue-selectivity studies"],

@@ -38,7 +38,7 @@ while ((m = re.exec(src))) {
     purity: rest.match(/purity:\s*"([^"]+)"/)?.[1] ?? "≥ 98% (RP-HPLC)",
     storage: rest.match(/storage:\s*"([^"]+)"/)?.[1] ?? "Store at −20 °C, protect from light",
     form: rest.match(/form:\s*"([^"]+)"/)?.[1] ?? "Lyophilized powder",
-    sizes: [...rest.matchAll(/\{\s*label:\s*"([^"]+)",\s*price:\s*(\d+)\s*\}/g)]
+    sizes: [...rest.matchAll(/\{\s*label:\s*"([^"]+)",\s*price:\s*([\d.]+)\s*\}/g)]
       .map((s) => ({ label: s[1], price: Number(s[2]) })),
   })
 }
