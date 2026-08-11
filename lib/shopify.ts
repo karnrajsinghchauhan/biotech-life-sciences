@@ -59,7 +59,6 @@ export type ShopifyVariant = {
   id: string
   title: string
   availableForSale: boolean
-  quantityAvailable: number | null
   price: ShopifyMoney
   sku: string | null
 }
@@ -84,7 +83,7 @@ const PRODUCT_FIELDS = `
   featuredImage { url altText width height }
   priceRange { minVariantPrice { amount currencyCode } }
   variants(first: 20) {
-    edges { node { id title availableForSale quantityAvailable sku price { amount currencyCode } } }
+    edges { node { id title availableForSale sku price { amount currencyCode } } }
   }
 `
 
