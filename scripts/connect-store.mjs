@@ -48,9 +48,28 @@ function askSecret(q) {
   })
 }
 
+/**
+ * Normalise a store domain, or return null if the input clearly isn't one.
+ *
+ * Validates the SHAPE of what was typed before appending .myshopify.com —
+ * otherwise any string at all (a pasted shell command, say) would come back
+ * looking superficially valid.
+ */
 function normaliseDomain(input) {
-  let d = input.replace(/^https?:\/\//i, "").replace(/\/.*$/, "").trim().toLowerCase()
-  if (d && !d.includes(".")) d = `${d}.myshopify.com`
+  const raw = String(input || "").trim()
+  if (!raw) return null
+
+  // A pasted command or sentence — not a domain.
+  if (/[\s&|;'"<>()$`\\]/.test(raw)) return null
+
+  let d = raw.replace(/^https?:\/\//i, "").replace(/\/.*$/, "").toLowerCase()
+  if (!d) return null
+
+  // Bare handle → add the suffix.
+  if (!d.includes(".")) d = `${d}.myshopify.com`
+
+  // Must be a plain hostname, and specifically a myshopify.com one.
+  if (!/^[a-z0-9][a-z0-9-]*\.myshopify\.com$/.test(d)) return null
   return d
 }
 
@@ -79,19 +98,26 @@ function upsertEnv(updates) {
 }
 
 async function check(domain, token) {
-  const res = await fetch(`https://${domain}/api/${API_VERSION}/graphql.json`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", "X-Shopify-Storefront-Access-Token": token },
-    body: JSON.stringify({
-      query: `{ shop { name paymentSettings { currencyCode } }
-               products(first: 50) { edges { node { title handle availableForSale
-                 variants(first: 5) { edges { node { title price { amount } } } } } } } }`,
-    }),
-  })
-  if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` }
-  const j = await res.json()
-  if (j.errors) return { ok: false, detail: j.errors.map((e) => e.message).join("; ") }
-  return { ok: true, shop: j.data.shop, products: j.data.products.edges.map((e) => e.node) }
+  // Never throws — a bad domain or offline network returns a result object
+  // so the caller can report it cleanly instead of crashing the process.
+  try {
+    const res = await fetch(`https://${domain}/api/${API_VERSION}/graphql.json`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Shopify-Storefront-Access-Token": token },
+      body: JSON.stringify({
+        query: `{ shop { name paymentSettings { currencyCode } }
+                 products(first: 50) { edges { node { title handle availableForSale
+                   variants(first: 5) { edges { node { title price { amount } } } } } } } }`,
+      }),
+    })
+    if (!res.ok) return { ok: false, detail: `HTTP ${res.status}` }
+    const j = await res.json()
+    if (j.errors) return { ok: false, detail: j.errors.map((e) => e.message).join("; ") }
+    if (!j.data?.shop) return { ok: false, detail: "unexpected response from Shopify" }
+    return { ok: true, shop: j.data.shop, products: j.data.products.edges.map((e) => e.node) }
+  } catch (e) {
+    return { ok: false, detail: (e?.cause?.message || e.message || "network error") }
+  }
 }
 
 /** Read --flag value / --flag=value from argv. */
@@ -127,9 +153,14 @@ function arg(name) {
 
   const rawDomain = argDomain || (await ask("  Store domain (e.g. my-store.myshopify.com): "))
   const domain = normaliseDomain(rawDomain)
-  if (!domain.endsWith(".myshopify.com")) {
-    console.log(`\n  ✖ "${domain}" doesn't look like a myshopify.com domain.`)
-    console.log(`    Use the permanent one from Settings → Domains, not a custom domain.\n`)
+  if (!domain) {
+    console.log(`\n  ✖ That isn't a valid store domain:`)
+    console.log(`      ${JSON.stringify(String(rawDomain).slice(0, 70))}`)
+    console.log(`\n    Expected something like  my-store.myshopify.com`)
+    console.log(`    Use the permanent .myshopify.com address from`)
+    console.log(`    Settings → Domains — not a custom domain, and not a`)
+    console.log(`    pasted shell command.\n`)
+    console.log(`    Nothing was written to .env.local.\n`)
     rl.close()
     process.exit(1)
   }
