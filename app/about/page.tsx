@@ -1,9 +1,16 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import Image from "next/image"
 import CountUp from "@/components/CountUp"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
 import { products } from "@/lib/data"
+
+const FACILITY = [
+  { src: "/images/facility/building.webp", w: 1080, h: 568, caption: "Our facility in Oxford, United Kingdom", alt: "Exterior of the Biotech Life Sciences facility in Oxford" },
+  { src: "/images/facility/manufacturing.webp", w: 1080, h: 573, caption: "Advanced peptide manufacturing facility — UK", alt: "Peptide manufacturing facility interior with process equipment and technicians" },
+  { src: "/images/facility/quality-control.webp", w: 1080, h: 385, caption: "Quality control & testing — UK standards", alt: "Technician operating quality control and testing equipment" },
+]
 
 export const metadata: Metadata = {
   title: "About",
@@ -53,6 +60,26 @@ export default function AboutPage() {
               ))}
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="section" style={{ position: "relative", overflow: "hidden" }}>
+        <span className="molecular-layer tr" aria-hidden="true" />
+        <div className="container" style={{ position: "relative", zIndex: 1 }}>
+          <Reveal>
+            <span className="eyebrow">Where it's made</span>
+            <h2 className="h-section">Our facility</h2>
+          </Reveal>
+          <div className="grid-3" style={{ marginTop: 24 }}>
+            {FACILITY.map((f, i) => (
+              <Reveal key={f.src} delay={(i % 3) as 0 | 1 | 2}>
+                <figure className="photo-frame" style={{ aspectRatio: "16 / 11" }}>
+                  <Image src={f.src} alt={f.alt} width={f.w} height={f.h} sizes="(max-width: 720px) 92vw, 380px" />
+                  <figcaption className="photo-caption">{f.caption}</figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
