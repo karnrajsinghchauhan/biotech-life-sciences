@@ -12,7 +12,7 @@ const PILLARS = [
   ["Custom Requests", "Compounds not in the catalogue, quoted on request — availability never guaranteed until confirmed."],
 ]
 
-export default function WholesaleClient() {
+export default function WholesaleClient({ defaultProduct }: { defaultProduct?: string }) {
   const [sent, setSent] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
@@ -87,7 +87,7 @@ export default function WholesaleClient() {
                 <div className="field"><label>Company / Institution *</label><input name="company" required /></div>
                 <div className="field"><label>Email *</label><input name="email" type="email" required /></div>
                 <div className="field"><label>Country *</label><input name="country" required /></div>
-                <div className="field full"><label>Products of interest *</label><input name="products" required placeholder="e.g. BPC-157 10 mg, GHK-Cu 100 mg…" /></div>
+                <div className="field full"><label>Products of interest *</label><input name="products" required defaultValue={defaultProduct} placeholder="e.g. BPC-157 10 mg, GHK-Cu 100 mg…" /></div>
                 <div className="field"><label>Approximate quantity *</label><input name="quantity" required placeholder="e.g. 50 vials / month" /></div>
                 <div className="field"><label>Research application</label><input name="application" placeholder="e.g. preclinical tissue-repair models" /></div>
                 <div className="field full"><label>Message</label><textarea name="message" rows={4} /></div>

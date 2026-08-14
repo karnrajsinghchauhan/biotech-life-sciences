@@ -7,24 +7,34 @@ import { researchApplications } from "@/lib/evidence"
 import EvidenceBadge from "@/components/EvidenceBadge"
 import Vial from "@/components/Vial"
 import ProductViewer from "@/components/ProductViewer"
-import AddToCart from "@/components/AddToCart"
+import ShopifyBuy from "@/components/ShopifyBuy"
 import ProductCard from "@/components/ProductCard"
 import FAQList from "@/components/FAQList"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
+import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }))
 }
+
+// Keep Shopify-backed pricing/availability fresh without a redeploy, same as /shop.
+export const revalidate = 300
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = bySlug(params.slug)
   return p ? { title: `${p.name} — Research Compound`, description: p.overview.slice(0, 155) } : {}
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+export default async function ProductPage({ params }: { params: { slug: string } }) {
   const p = bySlug(params.slug)
   if (!p) notFound()
+
+  const configured = isShopifyConfigured()
+  const [shopifyProduct, shop] = configured
+    ? await Promise.all([getProduct(p.slug), getShopInfo()])
+    : [null, null]
+  const currency = shop?.paymentSettings.currencyCode ?? "INR"
   const cat = categoryBySlug(p.category)!
   const coas = coaForProduct(p.slug)
   const related = (p.related || []).map(bySlug).filter(Boolean)
@@ -88,7 +98,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 <span className="chip type">In stock</span>
               </div>
               <div className="card" style={{ padding: 22 }}>
-                <AddToCart p={p} />
+                {shopifyProduct && shopifyProduct.variants.length > 0 ? (
+                  <ShopifyBuy variants={shopifyProduct.variants} currency={currency} />
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    <p className="small">
+                      This compound isn't yet listed for direct purchase. Request pricing and availability via
+                      wholesale enquiry.
+                    </p>
+                    <Link href={`/wholesale?product=${encodeURIComponent(p.name)}`} className="btn primary wide">
+                      Request Wholesale Quote
+                    </Link>
+                  </div>
+                )}
               </div>
               <div className="notice">
                 {site.disclaimer}

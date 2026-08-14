@@ -19,6 +19,7 @@ export default function ShopifyBuy({
     variants.find((v) => v.availableForSale) ?? variants[0]
   )
   const [qty, setQty] = useState(1)
+  const [ruo, setRuo] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState("")
   const [added, setAdded] = useState<{ checkoutUrl: string; count: number } | null>(null)
@@ -38,6 +39,7 @@ export default function ShopifyBuy({
 
   const add = async () => {
     if (!selected) return
+    if (!ruo) { setError("Please confirm the Research Use Only acknowledgement before adding to cart."); return }
     setBusy(true)
     setError("")
     try {
@@ -103,6 +105,15 @@ export default function ShopifyBuy({
           {busy ? "Adding…" : selected?.availableForSale ? "Add to Cart" : "Unavailable"}
         </button>
       </div>
+
+      <label style={{ display: "flex", gap: 10, alignItems: "flex-start", cursor: "pointer" }}>
+        <input type="checkbox" checked={ruo} onChange={(e) => { setRuo(e.target.checked); setError("") }} style={{ marginTop: 4 }} />
+        <span style={{ fontSize: 13.5, color: "var(--ink-2)" }}>
+          <b>Research Use Only acknowledgement.</b> I confirm this order will be used exclusively for laboratory
+          research by suitably qualified individuals, and not for any human or veterinary use, diagnosis,
+          treatment or prevention of disease.
+        </span>
+      </label>
 
       {error && <div className="notice">{error}</div>}
 

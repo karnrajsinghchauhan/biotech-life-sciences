@@ -1,9 +1,6 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
 import { Product, categoryBySlug } from "@/lib/data"
-import { useCart } from "@/lib/cart"
 import Vial from "./Vial"
 
 function MolPattern() {
@@ -21,9 +18,7 @@ function MolPattern() {
 }
 
 export default function ProductCard({ p }: { p: Product }) {
-  const { add, fmt } = useCart()
   const cat = categoryBySlug(p.category)
-  const from = Math.min(...p.sizes.map((s) => s.price))
 
   return (
     <article className="card pcard">
@@ -62,11 +57,7 @@ export default function ProductCard({ p }: { p: Product }) {
           {p.coa ? <span className="chip doc">✓ COA Available</span> : <span className="chip type">Batch documented</span>}
         </div>
         <div className="pcard-foot">
-          <div className="pcard-price"><span>from </span>{fmt(from)}</div>
-          <div className="pcard-actions">
-            <Link href={`/products/${p.slug}`} className="btn ghost sm">View Research</Link>
-            <button className="btn primary sm" onClick={() => add(p.slug, p.sizes[0].label)}>Add</button>
-          </div>
+          <Link href={`/products/${p.slug}`} className="btn primary sm wide">View Research &amp; Pricing →</Link>
         </div>
       </div>
     </article>

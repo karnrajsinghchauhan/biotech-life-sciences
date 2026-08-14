@@ -1,12 +1,11 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, Space_Grotesk } from "next/font/google"
 import "./globals.css"
-import { CartProvider } from "@/lib/cart"
 import AnnouncementBar from "@/components/AnnouncementBar"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-import CartDrawer from "@/components/CartDrawer"
 import SupportWidget from "@/components/SupportWidget"
+import CookieConsent from "@/components/CookieConsent"
 import { site } from "@/lib/config"
 
 // Self-hosted by next/font — no external request, no layout shift.
@@ -90,14 +89,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
         <a href="#main" className="skip-link">Skip to content</a>
-        <CartProvider>
-          <AnnouncementBar />
-          <Header />
-          <main id="main">{children}</main>
-          <Footer />
-          <CartDrawer />
-          <SupportWidget />
-        </CartProvider>
+        <AnnouncementBar />
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+        <SupportWidget />
+        <CookieConsent />
       </body>
     </html>
   )

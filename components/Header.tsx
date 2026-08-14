@@ -3,8 +3,6 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { useCart } from "@/lib/cart"
-import { regions } from "@/lib/config"
 import SearchOverlay from "./SearchOverlay"
 
 const NAV = [
@@ -41,7 +39,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [search, setSearch] = useState(false)
-  const { count, setOpen, region, setRegion } = useCart()
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 12)
@@ -65,23 +62,12 @@ export default function Header() {
             ))}
           </nav>
           <div className="header-actions">
-            <select
-              aria-label="Region"
-              value={region}
-              onChange={(e) => setRegion(e.target.value as any)}
-              style={{ border: "1px solid var(--line)", borderRadius: 999, padding: "8px 10px", fontSize: 13, background: "var(--surface)", color: "var(--ink)" }}
-            >
-              {regions.map((r) => (
-                <option key={r.code} value={r.code}>{r.code} · {r.currency}</option>
-              ))}
-            </select>
             <button className="icon-btn" aria-label="Search" onClick={() => setSearch(true)}>
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
             </button>
-            <button className="icon-btn" aria-label="Cart" onClick={() => setOpen(true)}>
+            <Link href="/shop" className="icon-btn" aria-label="Shop">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 7h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8Z" /><path d="M9 10V6a3 3 0 0 1 6 0v4" /></svg>
-              {count > 0 && <span className="cart-badge">{count}</span>}
-            </button>
+            </Link>
             <button className="icon-btn burger" aria-label="Menu" onClick={() => setMobile((v) => !v)}>
               {mobile ? (
                 <svg width="17" height="17" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
