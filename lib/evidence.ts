@@ -134,4 +134,77 @@ export const researchApplications: ResearchApplication[] = [
     sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=GHK-Cu+copper+peptide+skin",
     note: "Study quality and endpoints differ widely across this literature. Results for one formulation or route do not generalize to others.",
   },
+  {
+    compound: "PT-141 (Bremelanotide)",
+    productSlug: "pt-141",
+    application: "Melanocortin-receptor / sexual-function research",
+    level: "established",
+    description:
+      "Bremelanotide is a melanocortin-4-receptor agonist that has completed randomized clinical trials for hypoactive sexual desire disorder in premenopausal women, the indication for which it holds regulatory approval in some jurisdictions.",
+    sourceLabel: "Registered clinical trials (ClinicalTrials.gov)",
+    sourceUrl: "https://clinicaltrials.gov/search?term=bremelanotide",
+    note: "Approved medicines containing this molecule are prescribed and supervised by clinicians for a specific diagnosed condition. Nothing here is a recommendation for self-administration.",
+  },
+  {
+    compound: "Thymosin Alpha-1",
+    productSlug: "thymosin-alpha-1",
+    application: "Immune-signaling / immunomodulation research",
+    level: "clinical",
+    description:
+      "Thymalfasin (thymosin alpha-1) has been evaluated in human clinical trials and holds regulatory approval as an immune adjunct in a number of countries outside the United States, though not as an FDA-approved medicine.",
+    sourceLabel: "Clinical and immunology literature (PubMed)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=thymosin+alpha+1+clinical+trial",
+  },
+  {
+    compound: "Ipamorelin",
+    productSlug: "ipamorelin",
+    application: "Growth-hormone secretagogue research",
+    level: "investigational",
+    description:
+      "Ipamorelin is studied as a selective ghrelin-receptor agonist for growth-hormone release, noted in the literature for reduced cortisol and prolactin co-release relative to earlier secretagogues. Human evidence remains early-stage outside the specific trials that have been run.",
+    sourceLabel: "Endocrine research literature (PubMed)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=ipamorelin+growth+hormone+secretagogue",
+  },
+  {
+    compound: "TB-500 (Thymosin β4 fragment)",
+    productSlug: "tb-500",
+    application: "Preclinical research / tissue-repair research",
+    level: "preclinical",
+    description:
+      "TB-500 is studied as an actin-binding fragment of thymosin beta-4 in cell-migration and wound-model research. As with BPC-157, the evidence base is predominantly preclinical, and human clinical data are limited.",
+    sourceLabel: "Preclinical literature (PubMed)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=thymosin+beta-4+tissue+repair",
+    note: "Predominantly animal and in-vitro studies. Findings in preclinical models frequently do not translate to humans.",
+  },
+  {
+    compound: "Epitalon",
+    productSlug: "epitalon",
+    application: "Telomerase-activity / aging-biology research",
+    level: "preclinical",
+    description:
+      "Epitalon (epithalon) is studied within the peptide-bioregulator literature, largely originating from Russian research groups, in relation to telomerase activity and pineal function. Rigorous, independently replicated human trial data are limited.",
+    sourceLabel: "Preclinical and bioregulator literature (PubMed)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=epitalon+OR+epithalon+telomerase",
+    note: "Much of the underlying literature has not been independently replicated outside the originating research groups.",
+  },
+  {
+    compound: "NAD+",
+    productSlug: "nad-plus",
+    application: "Cellular-energy / redox-biology research",
+    level: "limited",
+    description:
+      "NAD+ is a well-characterized coenzyme central to cellular redox biology, but direct human evidence for exogenous NAD+ administration (as distinct from NAD+ precursor supplementation, which has its own separate literature) remains limited.",
+    sourceLabel: "Cellular biology literature (PubMed)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=NAD%2B+administration+human",
+  },
+  {
+    compound: "Semax",
+    productSlug: "semax",
+    application: "Neurotrophin / cognition research",
+    level: "investigational",
+    description:
+      "Semax is a registered nasal drug in Russia and has an associated body of Russian-language clinical literature, but it does not hold FDA or EMA approval and Western-language, independently replicated trial data are comparatively sparse.",
+    sourceLabel: "Neuroscience literature (PubMed)",
+    sourceUrl: "https://pubmed.ncbi.nlm.nih.gov/?term=semax+peptide+cognition",
+  },
 ]
