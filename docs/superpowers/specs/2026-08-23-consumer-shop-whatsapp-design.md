@@ -36,6 +36,7 @@ Consumer-facing category labels (display only — `CategorySlug` values are unch
 | cognitive          | Nootropic              |
 | dermal             | Skin Health             |
 | tissue-repair      | Tissue Repair           |
+| cellular           | Cellular Health          |
 | metabolic          | Metabolic               |
 | gh-performance     | GH & Performance        |
 | sleep              | Sleep                   |
