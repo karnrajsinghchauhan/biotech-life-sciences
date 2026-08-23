@@ -86,6 +86,8 @@ export type Product = {
   bestSeller?: boolean
   coa?: boolean // true only when a real COA document exists in lib/coa.ts
   related?: string[]
+  /** "pen" renders via the Pen SVG fallback instead of Vial when no photo exists. */
+  deviceType?: "vial" | "pen"
 }
 
 const SPEC = {
@@ -610,6 +612,60 @@ export const products: Product[] = [
     overview: "The methylated, biologically active form of cobalamin used in methylation-pathway, neuronal and cellular-metabolism research.",
     research: ["Methylation-pathway research", "Cellular-metabolism studies"],
     related: ["nad-plus", "glutathione"],
+  },
+
+  // ================= PRE-FILLED RESEARCH PENS =================
+  // Same compounds as their vial counterparts, supplied in a pre-filled,
+  // multi-dose pen format for laboratory dosing-precision and delivery-
+  // device research. Same RUO framing and disclaimer as every other
+  // product — no dosing or self-administration guidance is provided.
+  {
+    slug: "ghk-cu-pen", sku: "BTLS-201P", code: "CU50P", deviceType: "pen",
+    name: "GHK-Cu Pen", altName: "Copper Peptide — Pre-Filled Pen",
+    compoundType: "Peptide", category: "dermal", categories: ["dermal", "tissue-repair", "longevity"],
+    sizes: [{ label: "50 mg pen", price: 8999 }, { label: "100 mg pen", price: 14999 }],
+    purity: "≥ 98% (RP-HPLC)", form: "Pre-filled, multi-dose research pen", storage: "Refrigerate 2–8 °C after reconstitution, protect from light",
+    stability: "21 days refrigerated once reconstituted", solubility: "Pre-reconstituted, bacteriostatic water carrier (for research use only)",
+    overview: "GHK-Cu supplied in a pre-filled, multi-dose pen device rather than a lyophilized vial, for laboratory research into delivery-device consistency and dosing precision alongside its established use in collagen-synthesis and skin-remodeling research.",
+    research: ["Delivery-device and dosing-precision studies", "Collagen-synthesis studies", "Skin-remodeling research", "Wound-repair models"],
+    featured: true, isNew: true,
+    related: ["ghk-cu", "bpc-157-tb-500"],
+  },
+  {
+    slug: "retatrutide-pen", sku: "BTLS-601P", code: "RT10P", deviceType: "pen",
+    name: "Retatrutide Pen", altName: "Triple Agonist — Pre-Filled Pen",
+    compoundType: "Peptide", category: "metabolic", categories: ["metabolic"],
+    sizes: [{ label: "10 mg pen", price: 12999 }, { label: "20 mg pen", price: 18999 }],
+    purity: "≥ 98% (RP-HPLC)", form: "Pre-filled, multi-dose research pen", storage: "Refrigerate 2–8 °C after reconstitution, protect from light",
+    stability: "21 days refrigerated once reconstituted", solubility: "Pre-reconstituted, bacteriostatic water carrier (for research use only)",
+    overview: "Retatrutide supplied in a pre-filled, multi-dose pen device rather than a lyophilized vial, for laboratory research into delivery-device consistency and dosing precision alongside its established use as a reference material in multi-receptor metabolic-signaling research.",
+    research: ["Delivery-device and dosing-precision studies", "Triple-agonist receptor pharmacology", "Metabolic regulation studies", "Energy-balance research"],
+    featured: true, isNew: true,
+    related: ["retatrutide", "tirzepatide"],
+  },
+  {
+    slug: "bpc-157-pen", sku: "BTLS-102P", code: "BPC10P", deviceType: "pen",
+    name: "BPC-157 Pen", altName: "Pentadecapeptide BPC — Pre-Filled Pen",
+    compoundType: "Peptide", category: "tissue-repair", categories: ["tissue-repair", "gastrointestinal"],
+    sizes: [{ label: "10 mg pen", price: 6999 }],
+    purity: "≥ 98% (RP-HPLC)", form: "Pre-filled, multi-dose research pen", storage: "Refrigerate 2–8 °C after reconstitution, protect from light",
+    stability: "21 days refrigerated once reconstituted", solubility: "Pre-reconstituted, bacteriostatic water carrier (for research use only)",
+    overview: "BPC-157 supplied in a pre-filled, multi-dose pen device rather than a lyophilized vial, for laboratory research into delivery-device consistency and dosing precision alongside its established use in tissue-repair and gastrointestinal mucosal research models.",
+    research: ["Delivery-device and dosing-precision studies", "Tissue-repair models", "Angiogenesis signaling", "GI mucosal research"],
+    featured: true, isNew: true,
+    related: ["bpc-157", "tb-500-pen"],
+  },
+  {
+    slug: "tb-500-pen", sku: "BTLS-103P", code: "TB10P", deviceType: "pen",
+    name: "TB-500 Pen", altName: "Thymosin β4 fragment — Pre-Filled Pen",
+    compoundType: "Peptide", category: "tissue-repair", categories: ["tissue-repair"],
+    sizes: [{ label: "10 mg pen", price: 7499 }],
+    purity: "≥ 98% (RP-HPLC)", form: "Pre-filled, multi-dose research pen", storage: "Refrigerate 2–8 °C after reconstitution, protect from light",
+    stability: "21 days refrigerated once reconstituted", solubility: "Pre-reconstituted, bacteriostatic water carrier (for research use only)",
+    overview: "TB-500 supplied in a pre-filled, multi-dose pen device rather than a lyophilized vial, for laboratory research into delivery-device consistency and dosing precision alongside its established use in cell-migration assays and wound-model research.",
+    research: ["Delivery-device and dosing-precision studies", "Cell migration", "Actin dynamics", "Wound models"],
+    featured: true, isNew: true,
+    related: ["bpc-157-pen", "tb-500"],
   },
 ]
 

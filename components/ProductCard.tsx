@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Product, categoryBySlug } from "@/lib/data"
 import Vial from "./Vial"
+import Pen from "./Pen"
 
 function MolPattern() {
   return (
@@ -42,7 +43,11 @@ export default function ProductCard({ p }: { p: Product }) {
         ) : (
           <>
             <MolPattern />
-            <Vial code={p.code} name={p.name} size={104} />
+            {p.deviceType === "pen" ? (
+              <Pen code={p.code} name={p.name} size={104} />
+            ) : (
+              <Vial code={p.code} name={p.name} size={104} />
+            )}
           </>
         )}
       </Link>

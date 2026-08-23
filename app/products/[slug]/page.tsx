@@ -6,6 +6,7 @@ import { coaForProduct, param } from "@/lib/coa"
 import { researchApplications } from "@/lib/evidence"
 import EvidenceBadge from "@/components/EvidenceBadge"
 import Vial from "@/components/Vial"
+import Pen from "@/components/Pen"
 import ProductViewer from "@/components/ProductViewer"
 import ShopifyBuy from "@/components/ShopifyBuy"
 import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
@@ -71,7 +72,11 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <div className="vial-stage" style={{ borderRadius: 20, border: "1px solid var(--line)", minHeight: 480, background: "radial-gradient(120% 90% at 50% 20%, #24272e 0%, #101216 55%, #08090b 100%)" }}>
                 <span className="molecular-layer tr" aria-hidden="true" />
                 <div style={{ zIndex: 2, alignSelf: "center" }}>
-                  <Vial code={p.code} name={p.name} size={210} />
+                  {p.deviceType === "pen" ? (
+                    <Pen code={p.code} name={p.name} size={210} />
+                  ) : (
+                    <Vial code={p.code} name={p.name} size={210} />
+                  )}
                 </div>
                 <span className="mono" style={{ position: "absolute", bottom: 16, left: 20, fontSize: 11, color: "var(--muted)", zIndex: 4 }}>
                   {p.sku}{p.code ? ` · ${p.code}` : ""} · {p.form}
