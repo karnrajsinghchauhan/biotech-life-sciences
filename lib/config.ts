@@ -10,6 +10,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://biotechlifesciences.uk",
   email: "info@biotechlifesciences.uk",
   phone: "+44 7529 563762",
+  whatsapp: "447529563762", // E.164 digits, no "+", for wa.me links
   location: "Oxford, United Kingdom",
   founded: 2000,
   hours: "Monday – Friday, 9:00 AM – 6:00 PM (GMT)",
