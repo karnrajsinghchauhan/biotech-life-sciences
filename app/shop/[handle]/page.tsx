@@ -4,8 +4,10 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 import ShopifyBuy from "@/components/ShopifyBuy"
+import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
+import { bySlug } from "@/lib/data"
 
 export const revalidate = 300
 
@@ -65,6 +67,9 @@ export default async function ShopProductPage({ params }: { params: { handle: st
               <div className="card" style={{ padding: 22 }}>
                 <ShopifyBuy variants={product.variants} currency={currency} />
               </div>
+              {bySlug(params.handle) && (
+                <WhatsAppOrderButton product={bySlug(params.handle)!} className="btn primary wide" />
+              )}
               <div className="notice">{site.disclaimer}</div>
             </div>
           </Reveal>

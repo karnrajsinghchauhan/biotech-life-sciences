@@ -8,9 +8,13 @@ import CountUp from "@/components/CountUp"
 import ResearchApplications from "@/components/ResearchApplications"
 import Testimonials from "@/components/Testimonials"
 import BatchTransparency, { TransparencyPromise } from "@/components/BatchTransparency"
-import { categories, featured, inCategory, primaryCategories, products, categoryBySlug } from "@/lib/data"
+import { categories, featured, inCategory, primaryCategories, products, categoryBySlug, CategorySlug } from "@/lib/data"
 import { faqs } from "@/lib/faqs"
 import { site } from "@/lib/config"
+import { shopCategoryLabel } from "@/lib/shopLabels"
+import ShopCategoryRail from "@/components/ShopCategoryRail"
+import ShopProductCard from "@/components/ShopProductCard"
+import BundleAssistant from "@/components/BundleAssistant"
 
 const STANDARDS = [
   { n: "01", t: "Purity", d: "Peptides manufactured to a ≥ 98% purity specification, verified by RP-HPLC." },
@@ -18,6 +22,11 @@ const STANDARDS = [
   { n: "03", t: "Batch Traceability", d: "Catalogue number and batch number on the vial, the document and the site." },
   { n: "04", t: "Rigorous Testing", d: "In-process controls during synthesis, lyophilization and final release." },
   { n: "05", t: "Research-Only Standards", d: "Supplied strictly for laboratory research under a clear RUO framework." },
+]
+
+const SHOP_CATEGORY_ORDER: CategorySlug[] = [
+  ...primaryCategories,
+  ...categories.map((c) => c.slug).filter((s) => !primaryCategories.includes(s)),
 ]
 
 export default function Home() {
@@ -37,9 +46,13 @@ export default function Home() {
                 A complete catalogue of research-grade compounds manufactured to exacting standards —
                 HPLC &amp; MS verified, batch documented, and supplied strictly for laboratory research.
               </p>
+              <div className="shop-hero-actions" style={{ marginBottom: 16 }}>
+                <a href="#shop-categories" className="btn primary">Shop Now</a>
+                <BundleAssistant />
+              </div>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 36 }}>
-                <Link href="/products" className="btn primary">Explore Research Catalogue</Link>
-                <Link href="/coa" className="btn ghost">Verify a COA</Link>
+                <Link href="/products" className="btn ghost sm">Explore Research Catalogue</Link>
+                <Link href="/coa" className="btn ghost sm">Verify a COA</Link>
               </div>
             </Reveal>
             <Reveal delay={2}>
@@ -59,6 +72,40 @@ export default function Home() {
             <Image className="hero-vial b" src="/images/products/retatrutide.webp" alt="" width={620} height={1343} priority sizes="300px" />
             <Image className="hero-vial c" src="/images/products/ipamorelin.webp" alt="" width={620} height={1343} sizes="220px" />
           </div>
+        </div>
+      </section>
+
+      {/* SHOP-FIRST: CATEGORY RAIL */}
+      <section className="section tight" id="shop-categories">
+        <div className="container">
+          <Reveal>
+            <span className="eyebrow">Shop by goal</span>
+            <h2 className="h-section" style={{ fontSize: 28 }}>Find what you&apos;re here for</h2>
+          </Reveal>
+          <ShopCategoryRail />
+        </div>
+      </section>
+
+      {/* SHOP-FIRST: PRODUCT GRID BY CATEGORY */}
+      <section className="section">
+        <div className="container" style={{ display: "flex", flexDirection: "column", gap: 52 }}>
+          {SHOP_CATEGORY_ORDER.map((slug) => {
+            const prods = inCategory(slug)
+            if (prods.length === 0) return null
+            return (
+              <Reveal key={slug}>
+                <div id={`shop-${slug}`}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 20, flexWrap: "wrap", gap: 10 }}>
+                    <h3 style={{ fontSize: 22 }}>{shopCategoryLabel[slug]}</h3>
+                    <Link href={`/categories/${slug}`} className="small" style={{ color: "var(--blue)" }}>See all {prods.length} →</Link>
+                  </div>
+                  <div className="grid-4">
+                    {prods.slice(0, 4).map((p) => <ShopProductCard key={p.slug} p={p} />)}
+                  </div>
+                </div>
+              </Reveal>
+            )
+          })}
         </div>
       </section>
 

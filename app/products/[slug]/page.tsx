@@ -8,6 +8,7 @@ import EvidenceBadge from "@/components/EvidenceBadge"
 import Vial from "@/components/Vial"
 import ProductViewer from "@/components/ProductViewer"
 import ShopifyBuy from "@/components/ShopifyBuy"
+import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 import ProductCard from "@/components/ProductCard"
 import FAQList from "@/components/FAQList"
 import Reveal from "@/components/Reveal"
@@ -112,6 +113,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   </div>
                 )}
               </div>
+              <WhatsAppOrderButton product={p} size={p.sizes[0]} className="btn primary wide" />
               <div className="notice">
                 {site.disclaimer}
               </div>
@@ -245,6 +247,10 @@ export default async function ProductPage({ params }: { params: { slug: string }
           </div>
         </section>
       )}
+
+      <div className="sticky-order-bar show">
+        <WhatsAppOrderButton product={p} size={p.sizes[0]} className="btn primary wide" />
+      </div>
     </>
   )
 }
