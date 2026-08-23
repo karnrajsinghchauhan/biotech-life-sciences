@@ -2,8 +2,9 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { categories, categoryBySlug, inCategory } from "@/lib/data"
-import ProductCard from "@/components/ProductCard"
+import ShopProductCard from "@/components/ShopProductCard"
 import Reveal from "@/components/Reveal"
+import { shopCategoryColor } from "@/lib/shopLabels"
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }))
@@ -18,15 +19,19 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
   const c = categoryBySlug(params.slug)
   if (!c) notFound()
   const prods = inCategory(c.slug)
+  const accent = shopCategoryColor[c.slug]
 
   return (
     <>
-      <section className="section tight" style={{ background: "var(--navy)", color: "#fff" }}>
+      <section
+        className="section tight"
+        style={{ background: `radial-gradient(120% 140% at 15% 0%, ${accent}22, transparent 55%), var(--navy)`, color: "#fff" }}
+      >
         <div className="container">
           <div className="breadcrumb" style={{ color: "rgba(255,255,255,0.6)", padding: 0, marginBottom: 20 }}>
             <Link href="/">Home</Link> / <Link href="/categories">Research Areas</Link> / <span style={{ color: "#fff" }}>{c.name}</span>
           </div>
-          <span className="eyebrow" style={{ color: "#7fb0ff" }}>{c.short}</span>
+          <span className="eyebrow" style={{ color: accent }}>{c.short}</span>
           <h1 className="h-section" style={{ color: "#fff" }}>{c.name}</h1>
           <p style={{ color: "rgba(255,255,255,0.75)", maxWidth: 640 }}>{c.text}</p>
           <p className="mono" style={{ marginTop: 18, fontSize: 12, color: "rgba(255,255,255,0.5)" }}>
@@ -40,7 +45,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           <div className="grid-3">
             {prods.map((p, i) => (
               <Reveal key={p.slug} delay={(i % 3) as 0 | 1 | 2}>
-                <ProductCard p={p} />
+                <ShopProductCard p={p} />
               </Reveal>
             ))}
           </div>

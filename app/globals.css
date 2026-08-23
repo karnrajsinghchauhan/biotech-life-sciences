@@ -704,3 +704,15 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; letter-spacing
 
 .sticky-order-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); background: var(--surface); border-top: 1px solid var(--line-strong); display: none; }
 @media (max-width: 720px) { .sticky-order-bar.show { display: block; } }
+
+/* per-category accent color: rail dot + product-card chip */
+.shop-rail-card { border-left-width: 2px; border-left-style: solid; }
+.shop-rail-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-bottom: 8px; }
+.cat-chip { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 4px 10px; border-radius: 999px; border: 1px solid; margin-bottom: 2px; }
+.cat-chip-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+/* prominent purity/legitimacy stat badge */
+.purity-badge { border: 1px solid var(--line-strong); border-radius: 20px; padding: 48px 36px; text-align: center; background: var(--surface); position: relative; overflow: hidden; }
+.purity-badge::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 100% at 50% 0%, rgba(255,255,255,0.08), transparent 60%); pointer-events: none; }
+.purity-num { display: block; font-family: var(--font-display); font-size: clamp(56px, 8vw, 96px); font-weight: 700; letter-spacing: -0.03em; background: var(--grad-silver); -webkit-background-clip: text; background-clip: text; color: transparent; position: relative; z-index: 1; }
+.purity-cap { display: block; margin-top: 10px; font-size: 13.5px; color: var(--muted); line-height: 1.5; position: relative; z-index: 1; max-width: 260px; margin-left: auto; margin-right: auto; }
