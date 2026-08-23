@@ -11,7 +11,7 @@ import BatchTransparency, { TransparencyPromise } from "@/components/BatchTransp
 import { categories, featured, inCategory, primaryCategories, products, categoryBySlug, CategorySlug } from "@/lib/data"
 import { faqs } from "@/lib/faqs"
 import { site } from "@/lib/config"
-import { shopCategoryLabel } from "@/lib/shopLabels"
+import { shopCategoryLabel, shopCategoryColor } from "@/lib/shopLabels"
 import ShopCategoryRail from "@/components/ShopCategoryRail"
 import ShopProductCard from "@/components/ShopProductCard"
 import BundleAssistant from "@/components/BundleAssistant"
@@ -96,7 +96,10 @@ export default function Home() {
               <Reveal key={slug}>
                 <div id={`shop-${slug}`}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 20, flexWrap: "wrap", gap: 10 }}>
-                    <h3 style={{ fontSize: 22 }}>{shopCategoryLabel[slug]}</h3>
+                    <h3 style={{ fontSize: 22, display: "flex", alignItems: "center", gap: 10 }}>
+                      <span style={{ width: 8, height: 8, borderRadius: "50%", background: shopCategoryColor[slug], display: "inline-block" }} />
+                      {shopCategoryLabel[slug]}
+                    </h3>
                     <Link href={`/categories/${slug}`} className="small" style={{ color: "var(--blue)" }}>See all {prods.length} →</Link>
                   </div>
                   <div className="grid-4">
@@ -106,6 +109,31 @@ export default function Home() {
               </Reveal>
             )
           })}
+        </div>
+      </section>
+
+      {/* ABOUT / LEGITIMACY BAND */}
+      <section className="section alt">
+        <div className="container split center">
+          <Reveal>
+            <span className="eyebrow">Since {site.founded}</span>
+            <h2 className="h-section" style={{ fontSize: 30 }}>Real standards, not adjectives</h2>
+            <p style={{ color: "var(--ink-2)", fontSize: 15.5, maxWidth: 520 }}>
+              {site.name} is headquartered in {site.location}. We source from vetted, audited manufacturing
+              partners — not our own factory — and every released batch carries a third-party Certificate of
+              Analysis you can check yourself, not just take our word for.
+            </p>
+            <div style={{ display: "flex", gap: 12, marginTop: 20, flexWrap: "wrap" }}>
+              <Link href="/about" className="btn ghost sm">Our story →</Link>
+              <Link href="/coa" className="btn ghost sm">Verify a COA →</Link>
+            </div>
+          </Reveal>
+          <Reveal delay={1}>
+            <div className="purity-badge">
+              <span className="purity-num">≥98%</span>
+              <span className="purity-cap">Purity specification, verified by RP-HPLC on every released batch.</span>
+            </div>
+          </Reveal>
         </div>
       </section>
 
