@@ -154,6 +154,8 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing:
   display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 48px; align-items: center;
   padding: 72px 0 84px; position: relative;
 }
+.hero-grid-centered { text-align: center; padding: 76px 0 60px; max-width: 980px; margin: 0 auto; }
+.hero-grid-centered .hero-stats { max-width: 720px; margin: 8px auto 0; }
 .hero-canvas-wrap { position: relative; height: 520px; }
 .hero-canvas-wrap canvas { width: 100%; height: 100%; }
 .hero-stats {
@@ -624,9 +626,12 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing:
   mix-blend-mode: screen;
   animation: float 7s ease-in-out infinite;
 }
-.hero-vial.a { height: 62%; margin-right: -6%; z-index: 1; opacity: 0.72; animation-delay: -1.2s; }
-.hero-vial.b { height: 88%; z-index: 3; }
-.hero-vial.c { height: 66%; margin-left: -6%; z-index: 2; opacity: 0.78; animation-delay: -2.6s; }
+.hero-vial.a { height: 62%; margin-right: -6%; z-index: 2; opacity: 0.72; animation-delay: -1.2s; }
+.hero-vial.b { height: 88%; z-index: 5; }
+.hero-vial.c { height: 66%; margin-left: -6%; z-index: 3; opacity: 0.78; animation-delay: -2.6s; }
+.hero-vial.d { height: 34%; margin-right: 22px; z-index: 1; opacity: 0.34; animation-delay: -3.6s; }
+.hero-vial.e { height: 36%; margin-left: 22px; z-index: 1; opacity: 0.36; animation-delay: -0.6s; }
+@media (max-width: 900px) { .hero-vial.d, .hero-vial.e { display: none; } }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }

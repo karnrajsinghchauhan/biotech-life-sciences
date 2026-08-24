@@ -26,46 +26,50 @@ const SHOP_CATEGORY_ORDER: CategorySlug[] = [
 export default function Home() {
   return (
     <>
-      {/* HERO */}
-      <section className="hero">
-        <div className="container hero-grid">
-          <div>
-            <Reveal>
-              <span className="eyebrow">Research-grade biology</span>
-              <h1 className="h-display" style={{ margin: "18px 0 20px" }}>
-                Precision Peptides.<br />
-                <span style={{ color: "var(--blue)" }}>Built for Research.</span>
-              </h1>
-              <p className="lede" style={{ marginBottom: 30 }}>
-                A complete catalogue of research-grade compounds manufactured to exacting standards —
-                HPLC &amp; MS verified, batch documented, and supplied strictly for laboratory research.
-              </p>
-              <div className="shop-hero-actions" style={{ marginBottom: 16 }}>
-                <a href="#shop-categories" className="btn primary">Shop Now</a>
-                <BundleAssistant />
-              </div>
-              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 36 }}>
-                <Link href="/products" className="btn ghost sm">Explore Research Catalogue</Link>
-                <Link href="/coa" className="btn ghost sm">Verify a COA</Link>
-              </div>
-            </Reveal>
-            <Reveal delay={2}>
-              <div className="hero-stats">
-                <div className="hero-stat"><b>≥ 98%</b><span>Purity specification</span></div>
-                <div className="hero-stat"><b>HPLC + MS</b><span>Every batch verified</span></div>
-                <div className="hero-stat"><b><CountUp to={products.length} suffix="+" /></b><span>Research compounds</span></div>
-                <div className="hero-stat"><b>RUO</b><span>Research use only</span></div>
-              </div>
-            </Reveal>
-          </div>
+      {/* HERO — centered */}
+      <section className="hero hero-centered">
+        <div className="container hero-grid-centered">
+          <Reveal>
+            <span className="eyebrow" style={{ justifyContent: "center" }}>Research-grade biology</span>
+            <h1 className="h-display" style={{ margin: "18px auto 20px", maxWidth: 900 }}>
+              Precision Peptides.<br />
+              <span style={{ color: "var(--blue)" }}>Built for Research.</span>
+            </h1>
+            <p className="lede" style={{ margin: "0 auto 30px" }}>
+              A complete catalogue of research-grade compounds manufactured to exacting standards —
+              HPLC &amp; MS verified, batch documented, and supplied strictly for laboratory research.
+            </p>
+            <div className="shop-hero-actions" style={{ marginBottom: 16, justifyContent: "center" }}>
+              <a href="#shop-categories" className="btn primary">Shop Now</a>
+              <BundleAssistant />
+            </div>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 44, justifyContent: "center" }}>
+              <Link href="/products" className="btn ghost sm">Explore Research Catalogue</Link>
+              <Link href="/coa" className="btn ghost sm">Verify a COA</Link>
+            </div>
+          </Reveal>
+
           {/* Composition built from the company's own vial photography. */}
-          <div className="hero-vials" aria-hidden="true">
-            <span className="hero-glow" />
-            <span className="hero-floor" />
-            <Image className="hero-vial a" src="/images/products/ghk-cu.webp" alt="" width={620} height={1343} sizes="220px" />
-            <Image className="hero-vial b" src="/images/products/retatrutide.webp" alt="" width={620} height={1343} priority sizes="300px" />
-            <Image className="hero-vial c" src="/images/products/ipamorelin.webp" alt="" width={620} height={1343} sizes="220px" />
-          </div>
+          <Reveal delay={1}>
+            <div className="hero-vials" aria-hidden="true">
+              <span className="hero-glow" />
+              <span className="hero-floor" />
+              <Image className="hero-vial d" src="/images/products/cjc-1295-no-dac.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 80px, 180px" />
+              <Image className="hero-vial a" src="/images/products/ghk-cu.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 100px, 220px" />
+              <Image className="hero-vial b" src="/images/products/retatrutide.webp" alt="" width={620} height={1343} priority sizes="(max-width: 720px) 140px, 300px" />
+              <Image className="hero-vial c" src="/images/products/tirzepatide.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 100px, 220px" />
+              <Image className="hero-vial e" src="/images/products/ipamorelin.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 80px, 180px" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={2}>
+            <div className="hero-stats">
+              <div className="hero-stat"><b>≥ 98%</b><span>Purity specification</span></div>
+              <div className="hero-stat"><b>HPLC + MS</b><span>Every batch verified</span></div>
+              <div className="hero-stat"><b><CountUp to={products.length} suffix="+" /></b><span>Research compounds</span></div>
+              <div className="hero-stat"><b>RUO</b><span>Research use only</span></div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
