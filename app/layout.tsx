@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, Space_Grotesk } from "next/font/google"
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
 import "./globals.css"
 import AnnouncementBar from "@/components/AnnouncementBar"
 import Header from "@/components/Header"
@@ -8,18 +9,8 @@ import SupportWidget from "@/components/SupportWidget"
 import CookieConsent from "@/components/CookieConsent"
 import { site } from "@/lib/config"
 
-// Self-hosted by next/font — no external request, no layout shift.
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-})
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-})
+// Geist — self-hosted, zero layout shift, the closest well-supported free
+// web typeface to Apple's SF Pro. Replaces Inter/Space Grotesk everywhere.
 
 const DESCRIPTION =
   "Premium research peptides manufactured to exacting standards — HPLC & MS verified, batch documented, supplied for laboratory research use only. Biotech Life Sciences, United Kingdom."
@@ -82,7 +73,7 @@ const orgSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body>
         <script
           type="application/ld+json"
