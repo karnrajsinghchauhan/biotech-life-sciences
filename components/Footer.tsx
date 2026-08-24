@@ -27,6 +27,7 @@ export default function Footer() {
             <ul>
               <li><Link href="/shop">Shop</Link></li>
               <li><Link href="/products">All Products</Link></li>
+              <li><Link href="/pens">🖊️ Research Pens</Link></li>
               <li><Link href="/categories/tissue-repair">Tissue Repair</Link></li>
               <li><Link href="/categories/dermal">Dermal Research</Link></li>
               <li><Link href="/categories/cellular">Cellular Research</Link></li>
