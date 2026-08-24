@@ -15,14 +15,8 @@ import { shopCategoryLabel, shopCategoryColor } from "@/lib/shopLabels"
 import ShopCategoryRail from "@/components/ShopCategoryRail"
 import ShopProductCard from "@/components/ShopProductCard"
 import BundleAssistant from "@/components/BundleAssistant"
-
-const STANDARDS = [
-  { n: "01", t: "Purity", d: "Peptides manufactured to a ≥ 98% purity specification, verified by RP-HPLC." },
-  { n: "02", t: "Identity Verification", d: "Every batch identity-confirmed by mass spectrometry against the theoretical mass." },
-  { n: "03", t: "Batch Traceability", d: "Catalogue number and batch number on the vial, the document and the site." },
-  { n: "04", t: "Rigorous Testing", d: "In-process controls during synthesis, lyophilization and final release." },
-  { n: "05", t: "Research-Only Standards", d: "Supplied strictly for laboratory research under a clear RUO framework." },
-]
+import TrustGrid from "@/components/TrustGrid"
+import PenPromoBanner from "@/components/PenPromoBanner"
 
 const SHOP_CATEGORY_ORDER: CategorySlug[] = [
   ...primaryCategories,
@@ -72,6 +66,13 @@ export default function Home() {
             <Image className="hero-vial b" src="/images/products/retatrutide.webp" alt="" width={620} height={1343} priority sizes="300px" />
             <Image className="hero-vial c" src="/images/products/ipamorelin.webp" alt="" width={620} height={1343} sizes="220px" />
           </div>
+        </div>
+      </section>
+
+      {/* PEN PROMO BANNER */}
+      <section className="section tight" style={{ paddingBottom: 0 }}>
+        <div className="container">
+          <PenPromoBanner />
         </div>
       </section>
 
@@ -275,27 +276,8 @@ export default function Home() {
       <TransparencyPromise />
       <Testimonials />
 
-      {/* STANDARDS */}
-      <section className="section">
-        <div className="container">
-          <Reveal>
-            <span className="eyebrow">Our standards</span>
-            <h2 className="h-section">Quality, expressed as documentation</h2>
-            <p className="lede">Founded in {site.founded}. {site.location}. Every claim on this site is backed by batch-level paperwork, not adjectives.</p>
-          </Reveal>
-          <Reveal delay={1}>
-            <div className="standards-grid" style={{ marginTop: 30 }}>
-              {STANDARDS.map((s) => (
-                <div key={s.n} className="standard">
-                  <span className="n">{s.n}</span>
-                  <h3>{s.t}</h3>
-                  <p>{s.d}</p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* TRUST GRID — replaces the old text-only standards list */}
+      <TrustGrid />
 
       {/* RESEARCH LIBRARY PREVIEW */}
       <section className="section alt">

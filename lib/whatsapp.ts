@@ -22,3 +22,8 @@ export function buildBundleWhatsAppLink(products: Product[]): string {
   const text = `Hi, I'd like to order this bundle:\n\n${lines}\n\n${RUO_LINE}`
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
 }
+
+export function buildGeneralWhatsAppLink(): string {
+  const text = "Hi, I have a question about a research compound in the Biotech Life Sciences catalogue."
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
+}
