@@ -4,7 +4,7 @@ import type { Metadata } from "next"
 import { categories, categoryBySlug, inCategory } from "@/lib/data"
 import ShopProductCard from "@/components/ShopProductCard"
 import Reveal from "@/components/Reveal"
-import { shopCategoryColor } from "@/lib/shopLabels"
+import { shopCategoryColor, shopCategoryEmoji } from "@/lib/shopLabels"
 
 export function generateStaticParams() {
   return categories.map((c) => ({ slug: c.slug }))
@@ -31,7 +31,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           <div className="breadcrumb" style={{ color: "rgba(255,255,255,0.6)", padding: 0, marginBottom: 20 }}>
             <Link href="/">Home</Link> / <Link href="/categories">Research Areas</Link> / <span style={{ color: "#fff" }}>{c.name}</span>
           </div>
-          <span className="eyebrow" style={{ color: accent }}>{c.short}</span>
+          <span className="eyebrow" style={{ color: accent }}>{shopCategoryEmoji[c.slug]} {c.short}</span>
           <h1 className="h-section" style={{ color: "#fff" }}>{c.name}</h1>
           <p style={{ color: "rgba(255,255,255,0.75)", maxWidth: 640 }}>{c.text}</p>
           <p className="mono" style={{ marginTop: 18, fontSize: 12, color: "rgba(255,255,255,0.5)" }}>

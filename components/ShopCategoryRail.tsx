@@ -1,5 +1,5 @@
 import { categories, inCategory } from "@/lib/data"
-import { shopCategoryLabel, shopCategoryColor } from "@/lib/shopLabels"
+import { shopCategoryLabel, shopCategoryColor, shopCategoryEmoji } from "@/lib/shopLabels"
 
 export default function ShopCategoryRail() {
   const populated = categories.filter((c) => inCategory(c.slug).length > 0)
@@ -13,7 +13,7 @@ export default function ShopCategoryRail() {
           role="listitem"
           style={{ borderLeftColor: shopCategoryColor[c.slug] }}
         >
-          <span className="shop-rail-dot" style={{ background: shopCategoryColor[c.slug] }} aria-hidden="true" />
+          <span className="shop-rail-emoji" aria-hidden="true">{shopCategoryEmoji[c.slug]}</span>
           <b>{shopCategoryLabel[c.slug]}</b>
           <span>{inCategory(c.slug).length} products</span>
         </a>

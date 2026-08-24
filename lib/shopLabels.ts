@@ -23,6 +23,23 @@ export const shopCategoryLabel: Record<CategorySlug, string> = {
   other: "Specialist",
 }
 
+export const shopCategoryEmoji: Record<CategorySlug, string> = {
+  "tissue-repair": "🩹",
+  dermal: "✨",
+  cellular: "🧬",
+  metabolic: "⚡",
+  cognitive: "🧠",
+  "gh-performance": "💪",
+  immune: "🛡️",
+  longevity: "⏳",
+  sleep: "🌙",
+  reproductive: "💗",
+  mitochondrial: "🔋",
+  gastrointestinal: "🌿",
+  connective: "🦴",
+  other: "🧪",
+}
+
 // ============================================================
 // One muted, desaturated accent per category — pharma-premium,
 // not candy-bright. Used as small accents (dots, thin borders,

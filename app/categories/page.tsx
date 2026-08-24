@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { categories, inCategory } from "@/lib/data"
+import { shopCategoryLabel, shopCategoryColor, shopCategoryEmoji } from "@/lib/shopLabels"
 import Reveal from "@/components/Reveal"
 
 export const metadata: Metadata = {
@@ -24,14 +25,20 @@ export default function CategoriesPage() {
             {categories.map((c, i) => {
               const n = inCategory(c.slug).length
               if (n === 0) return null
+              const accent = shopCategoryColor[c.slug]
               return (
                 <Reveal key={c.slug} delay={(i % 3) as 0 | 1 | 2}>
                   <Link href={`/categories/${c.slug}`}>
-                    <div className="card catcard">
-                      <span className="num">{String(i + 1).padStart(2, "0")}</span>
-                      <h3>{c.name}</h3>
+                    <div
+                      className="card catcard"
+                      style={{ borderTopColor: accent, borderTopWidth: 2, borderTopStyle: "solid" }}
+                    >
+                      <span className="catcard-emoji" style={{ background: `${accent}1c`, color: accent }} aria-hidden="true">
+                        {shopCategoryEmoji[c.slug]}
+                      </span>
+                      <h3>{shopCategoryLabel[c.slug]}</h3>
                       <p>{c.text}</p>
-                      <span className="count">{n} compounds →</span>
+                      <span className="count" style={{ color: accent }}>{n} compounds →</span>
                     </div>
                   </Link>
                 </Reveal>
