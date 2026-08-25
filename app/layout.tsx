@@ -7,6 +7,7 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import SupportWidget from "@/components/SupportWidget"
 import CookieConsent from "@/components/CookieConsent"
+import AgeGate from "@/components/AgeGate"
 import { site } from "@/lib/config"
 
 // Geist — self-hosted, zero layout shift, the closest well-supported free
@@ -86,6 +87,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <SupportWidget />
         <CookieConsent />
+        <AgeGate />
       </body>
     </html>
   )
