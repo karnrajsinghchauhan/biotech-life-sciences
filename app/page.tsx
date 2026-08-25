@@ -30,35 +30,26 @@ export default function Home() {
       <section className="hero hero-centered">
         <div className="container hero-grid-centered">
           <Reveal>
-            <span className="eyebrow" style={{ justifyContent: "center" }}>Research-grade biology</span>
-            <h1 className="h-display" style={{ margin: "18px auto 20px", maxWidth: 900 }}>
-              Precision Peptides.<br />
-              <span style={{ color: "var(--blue)" }}>Built for Research.</span>
+            <span className="eyebrow" style={{ justifyContent: "center" }}>Since 2000</span>
+            <h1 className="h-display" style={{ margin: "18px auto 20px", maxWidth: 820 }}>
+              Every Batch, Verified.<br />
+              <span style={{ color: "var(--blue)" }}>Not Just Claimed.</span>
             </h1>
             <p className="lede" style={{ margin: "0 auto 30px" }}>
-              A complete catalogue of research-grade compounds manufactured to exacting standards —
-              HPLC &amp; MS verified, batch documented, and supplied strictly for laboratory research.
+              Every release is HPLC &amp; MS verified and checkable against its own Certificate of
+              Analysis before it ships — supplied strictly for laboratory research.
             </p>
-            <div className="shop-hero-actions" style={{ marginBottom: 16, justifyContent: "center" }}>
+            <div className="shop-hero-actions" style={{ marginBottom: 44, justifyContent: "center" }}>
               <a href="#shop-categories" className="btn primary">Shop Now</a>
-              <BundleAssistant />
-            </div>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 44, justifyContent: "center" }}>
-              <Link href="/products" className="btn ghost sm">Explore Research Catalogue</Link>
-              <Link href="/coa" className="btn ghost sm">Verify a COA</Link>
             </div>
           </Reveal>
 
-          {/* Composition built from the company's own vial photography. */}
+          {/* Real product photography — a single hero shot, not a lineup. */}
           <Reveal delay={1}>
-            <div className="hero-vials" aria-hidden="true">
+            <div className="hero-vials hero-vials-solo" aria-hidden="true">
               <span className="hero-glow" />
               <span className="hero-floor" />
-              <Image className="hero-vial d" src="/images/products/cjc-1295-no-dac.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 80px, 180px" />
-              <Image className="hero-vial a" src="/images/products/ghk-cu.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 100px, 220px" />
-              <Image className="hero-vial b" src="/images/products/retatrutide.webp" alt="" width={620} height={1343} priority sizes="(max-width: 720px) 140px, 300px" />
-              <Image className="hero-vial c" src="/images/products/tirzepatide.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 100px, 220px" />
-              <Image className="hero-vial e" src="/images/products/ipamorelin.webp" alt="" width={620} height={1343} sizes="(max-width: 720px) 80px, 180px" />
+              <Image className="hero-vial solo" src="/images/products/retatrutide.webp" alt="" width={620} height={1343} priority sizes="(max-width: 720px) 220px, 340px" />
             </div>
           </Reveal>
 
@@ -84,8 +75,13 @@ export default function Home() {
       <section className="section tight" id="shop-categories">
         <div className="container">
           <Reveal>
-            <span className="eyebrow">Shop by goal</span>
-            <h2 className="h-section" style={{ fontSize: 28 }}>Find what you&apos;re here for</h2>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", gap: 16, flexWrap: "wrap", marginBottom: 4 }}>
+              <div>
+                <span className="eyebrow">Shop by goal</span>
+                <h2 className="h-section" style={{ fontSize: 28, margin: "14px 0 0" }}>Find what you&apos;re here for</h2>
+              </div>
+              <BundleAssistant />
+            </div>
           </Reveal>
           <ShopCategoryRail />
         </div>
@@ -124,9 +120,9 @@ export default function Home() {
             <span className="eyebrow">Since {site.founded}</span>
             <h2 className="h-section" style={{ fontSize: 30 }}>Real standards, not adjectives</h2>
             <p style={{ color: "var(--ink-2)", fontSize: 15.5, maxWidth: 520 }}>
-              {site.name} is headquartered in {site.location}. We source from vetted, audited manufacturing
-              partners — not our own factory — and every released batch carries a third-party Certificate of
-              Analysis you can check yourself, not just take our word for.
+              Look up any batch number printed on a vial against its own Certificate of Analysis —
+              RP-HPLC purity, mass-spectrometry identity, release date. If the document isn't there,
+              the batch shouldn't be either. That's the whole standard.
             </p>
             <div style={{ display: "flex", gap: 12, marginTop: 20, flexWrap: "wrap" }}>
               <Link href="/about" className="btn ghost sm">Our story →</Link>

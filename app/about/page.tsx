@@ -1,16 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import Image from "next/image"
 import CountUp from "@/components/CountUp"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
 import { products } from "@/lib/data"
-
-const FACILITY = [
-  { src: "/images/facility/building.webp", w: 1080, h: 568, caption: "Our facility in Oxford, United Kingdom", alt: "Exterior of the Biotech Life Sciences facility in Oxford" },
-  { src: "/images/facility/manufacturing.webp", w: 1080, h: 573, caption: "Advanced peptide manufacturing facility — UK", alt: "Peptide manufacturing facility interior with process equipment and technicians" },
-  { src: "/images/facility/quality-control.webp", w: 1080, h: 385, caption: "Quality control & testing — UK standards", alt: "Technician operating quality control and testing equipment" },
-]
 
 export const metadata: Metadata = {
   title: "About",
@@ -40,17 +33,18 @@ export default function AboutPage() {
               researchers and distributors by maintaining exceptional standards of quality, consistency, and innovation.
             </p>
             <p style={{ color: "var(--ink-2)", fontSize: 16 }}>
-              We understand that reliable research begins with reliable products. Every peptide is manufactured
-              using advanced production techniques and undergoes rigorous quality control to ensure purity,
-              stability, and batch-to-batch consistency.
+              We understand that reliable research begins with reliable products. We source from vetted,
+              audited manufacturing partners rather than operating our own synthesis facility, and every
+              released batch is independently third-party tested for purity, identity, and stability before
+              it reaches you.
             </p>
           </Reveal>
           <Reveal delay={1}>
             <div className="grid-2" style={{ gap: 14 }}>
               {[
-                [<CountUp key="y" to={25} suffix="+" />, "Years of excellence"],
+                ["25+", "Years of excellence"],
                 [<CountUp key="p" to={products.length} suffix="+" />, "Research compounds"],
-                [<CountUp key="c" to={50} suffix="+" />, "Countries served"],
+                ["50+", "Countries served"],
                 ["UK", `Based in ${site.location.split(",")[0]}`],
               ].map(([v, l], i) => (
                 <div key={i} className="card" style={{ padding: "26px 22px", textAlign: "center" }}>
@@ -67,19 +61,14 @@ export default function AboutPage() {
         <span className="molecular-layer tr" aria-hidden="true" />
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <span className="eyebrow">Where it's made</span>
-            <h2 className="h-section">Our facility</h2>
+            <span className="eyebrow">How we source</span>
+            <h2 className="h-section">Vetted manufacturing partners, not our own factory</h2>
+            <p className="lede">
+              We don't operate a synthesis facility, and we don't claim to. {site.name} sources from
+              audited manufacturing partners and puts every batch through independent third-party
+              testing before it's released — verifiable on the COA Verification page, not just asserted here.
+            </p>
           </Reveal>
-          <div className="grid-3" style={{ marginTop: 24 }}>
-            {FACILITY.map((f, i) => (
-              <Reveal key={f.src} delay={(i % 3) as 0 | 1 | 2}>
-                <figure className="photo-frame" style={{ aspectRatio: "16 / 11" }}>
-                  <Image src={f.src} alt={f.alt} width={f.w} height={f.h} sizes="(max-width: 720px) 92vw, 380px" />
-                  <figcaption className="photo-caption">{f.caption}</figcaption>
-                </figure>
-              </Reveal>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -91,8 +80,9 @@ export default function AboutPage() {
               <div className="card" style={{ padding: 30 }}>
                 <h3 style={{ fontSize: 20, marginBottom: 10 }}>Our Mission</h3>
                 <p style={{ color: "var(--ink-2)", fontSize: 15 }}>
-                  To advance scientific research by providing premium research peptides manufactured to the
-                  highest standards of quality, precision, and reliability.
+                  To advance scientific research by supplying premium research peptides, sourced from vetted
+                  manufacturing partners and held to the highest standards of independent testing and
+                  documentation.
                 </p>
               </div>
               <div className="card" style={{ padding: 30 }}>
