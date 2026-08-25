@@ -42,6 +42,7 @@ export default function Footer() {
               <li><Link href="/library">Research Library</Link></li>
               <li><Link href="/products">Compound Directory</Link></li>
               <li><Link href="/coa">COA Verification</Link></li>
+              <li><Link href="/calculator">Dilution Calculator</Link></li>
               <li><Link href="/batch-reports">Batch Reports</Link></li>
               <li><Link href="/categories">Research Categories</Link></li>
               <li><Link href="/quality">Our Standards</Link></li>
