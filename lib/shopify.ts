@@ -91,8 +91,15 @@ type RawProduct = Omit<ShopifyProduct, "variants"> & {
   variants: { edges: { node: ShopifyVariant }[] }
 }
 
+// Shopify's plain-text `description` field strips HTML block tags (</p>, </li>)
+// without inserting whitespace, so adjacent sentences from separate paragraphs
+// in the source HTML land glued together — e.g. "...fat regulation.Research use
+// only." Reinsert the space Shopify dropped.
+const spaceAfterSentence = (text: string) => text.replace(/\.(?=[A-Z])/g, ". ")
+
 const flatten = (p: RawProduct): ShopifyProduct => ({
   ...p,
+  description: spaceAfterSentence(p.description),
   variants: p.variants.edges.map((e) => e.node),
 })
 
