@@ -146,6 +146,9 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 Descriptions reflect areas of published research interest for this compound class. They are
                 not claims of efficacy or safety, and this material is not supplied for any therapeutic purpose.
               </p>
+              <Link href="/library" className="small" style={{ display: "inline-flex", marginTop: 10, color: "var(--blue)", fontWeight: 600 }}>
+                See the Research Library for how to read this documentation →
+              </Link>
             </Reveal>
             {evidence && (
               <Reveal delay={1}>
