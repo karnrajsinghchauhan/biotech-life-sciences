@@ -87,12 +87,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHOP-FIRST: PRODUCT GRID BY CATEGORY */}
+      {/* SHOP-FIRST: PRODUCT GRID BY CATEGORY — capped to the top 5 so the
+          homepage doesn't stack all 13 categories before reaching anything
+          else; the rail above and /categories still surface every one. */}
       <section className="section">
         <div className="container" style={{ display: "flex", flexDirection: "column", gap: 52 }}>
-          {SHOP_CATEGORY_ORDER.map((slug) => {
+          {SHOP_CATEGORY_ORDER.filter((slug) => inCategory(slug).length > 0).slice(0, 5).map((slug) => {
             const prods = inCategory(slug)
-            if (prods.length === 0) return null
             return (
               <Reveal key={slug}>
                 <div id={`shop-${slug}`}>
@@ -110,6 +111,11 @@ export default function Home() {
               </Reveal>
             )
           })}
+          <Reveal>
+            <div style={{ textAlign: "center", paddingTop: 8 }}>
+              <Link href="/products" className="btn ghost">Browse the full catalogue by category →</Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
