@@ -101,7 +101,6 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 {coas.length > 0
                   ? <span className="chip doc">✓ COA Available — {coas.length} released batch{coas.length > 1 ? "es" : ""}</span>
                   : <span className="chip type">Batch documentation supplied with order</span>}
-                <span className="chip type">In stock</span>
               </div>
               <div className="card" style={{ padding: 22 }}>
                 {shopifyProduct && shopifyProduct.variants.length > 0 ? (
