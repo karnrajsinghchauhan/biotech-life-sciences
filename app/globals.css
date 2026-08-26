@@ -428,7 +428,13 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing:
   .showcase-body { padding: 30px 24px; }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
   .support-fab span.lbl { display: none; }
-  .support-fab { padding: 13px 15px; }
+  /* Clears the sticky WhatsApp order bar on product pages (~70-90px tall
+     with safe-area inset) so the two floating elements never overlap. */
+  .support-fab { padding: 13px 15px; bottom: calc(88px + env(safe-area-inset-bottom)); }
+  .support-panel { bottom: calc(148px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 480px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 30px; }
 }
 
 /* ============================================================
