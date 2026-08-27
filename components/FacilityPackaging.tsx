@@ -2,14 +2,10 @@ import Image from "next/image"
 import Reveal from "./Reveal"
 import { site } from "@/lib/config"
 
-// Every photograph in this file is the company's own, extracted from the
-// catalogue PDF. No stock imagery is used.
-
-const FACILITY = [
-  { src: "/images/facility/manufacturing.webp", w: 1080, h: 573, caption: "Advanced peptide manufacturing facility — UK", alt: "Peptide manufacturing facility interior with process equipment and technicians" },
-  { src: "/images/facility/building.webp", w: 1080, h: 568, caption: "Our facility in Oxford, United Kingdom", alt: "Exterior of the Biotech Life Sciences facility in Oxford" },
-  { src: "/images/facility/quality-control.webp", w: 1080, h: 385, caption: "Quality control & testing — UK standards", alt: "Technician operating quality control and testing equipment" },
-]
+// Packaging photography below is the company's own. We do not show
+// "facility" photography because Biotech Life Sciences sources from
+// manufacturing partners rather than operating its own synthesis facility —
+// see the Sourcing & Quality section for the honest version of that claim.
 
 const PACKAGING = [
   ["Tamper-evident packaging", "Each box is sealed with a tamper-evident hologram."],
@@ -23,25 +19,32 @@ const PACKAGING = [
 export default function FacilityPackaging() {
   return (
     <>
-      {/* ---------------- FACILITY ---------------- */}
+      {/* ---------------- SOURCING & QUALITY ---------------- */}
       <section className="section alt" style={{ position: "relative", overflow: "hidden" }}>
         <span className="molecular-layer bl" aria-hidden="true" />
         <div className="container" style={{ position: "relative", zIndex: 1 }}>
           <Reveal>
-            <span className="eyebrow">Facility</span>
-            <h2 className="h-section">Manufactured in the United Kingdom</h2>
+            <span className="eyebrow">Sourcing &amp; quality</span>
+            <h2 className="h-section">Vetted partners. Independently tested.</h2>
             <p className="lede">
-              {site.name} is headquartered in {site.location}. The photographs below are the
-              company&rsquo;s own, supplied with its catalogue.
+              {site.name} is headquartered in {site.location}. We source research peptides from
+              vetted, audited manufacturing partners rather than operating our own synthesis
+              facility — every released batch carries a third-party Certificate of Analysis you
+              can verify independently.
             </p>
           </Reveal>
           <div className="grid-3" style={{ marginTop: 30 }}>
-            {FACILITY.map((f, i) => (
-              <Reveal key={f.src} delay={(i % 3) as 0 | 1 | 2}>
-                <figure className="photo-frame" style={{ aspectRatio: "16 / 11" }}>
-                  <Image src={f.src} alt={f.alt} width={f.w} height={f.h} sizes="(max-width: 720px) 92vw, 380px" />
-                  <figcaption className="photo-caption">{f.caption}</figcaption>
-                </figure>
+            {[
+              ["Partner vetting", "Manufacturing partners are assessed for process controls and documentation before any batch is listed."],
+              ["Independent testing", "Purity and identity are confirmed by third-party analytical testing, not self-certified."],
+              ["Verifiable on paper", "Every released batch's COA is checkable on the COA Verification page — no claim without a document behind it."],
+            ].map(([t, d], i) => (
+              <Reveal key={t} delay={(i % 3) as 0 | 1 | 2}>
+                <div className="card" style={{ padding: 26, height: "100%" }}>
+                  <span className="mono" style={{ color: "var(--blue)", fontSize: 12 }}>{String(i + 1).padStart(2, "0")}</span>
+                  <h3 style={{ fontSize: 18, margin: "10px 0 8px" }}>{t}</h3>
+                  <p className="small">{d}</p>
+                </div>
               </Reveal>
             ))}
           </div>

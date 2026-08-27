@@ -8,12 +8,11 @@ export const metadata: Metadata = {
 }
 
 const PROCESS = [
-  ["Raw Material Inspection", "Verification of identity and purity of all incoming materials."],
-  ["In-Process Control", "Continuous monitoring during synthesis and purification."],
-  ["Analytical Testing", "Advanced testing for purity, potency and structural integrity."],
-  ["Review & Approval", "Results reviewed by our quality experts and approved."],
-  ["Final Product Testing", "Final verification before release of each batch."],
-  ["Quality Release", "Only products that meet our strict standards are released."],
+  ["Partner Vetting", "Manufacturing partners are assessed for process controls, documentation and track record before we list anything they supply."],
+  ["Batch Documentation Review", "Every incoming batch's identity and purity documentation is reviewed before it's accepted into our catalogue."],
+  ["Independent Analytical Testing", "Purity, potency and structural integrity are confirmed by third-party testing — RP-HPLC and mass spectrometry — not self-certified by the manufacturer."],
+  ["Review & Approval", "Results are reviewed against our specification before a batch is approved for listing."],
+  ["Quality Release", "Only batches that meet our published standards, with documentation to prove it, are released for sale."],
   ["Secure Delivery", "Safe, secure and temperature-conscious shipping."],
 ]
 
@@ -40,11 +39,11 @@ export default function QualityPage() {
           </Reveal>
           <div className="grid-3" style={{ marginTop: 24 }}>
             {[
-              ["Premium Raw Materials", "We source only high-purity raw materials from trusted and qualified suppliers."],
-              ["Rigorous Testing", "Every batch undergoes analytical testing to confirm identity and purity — RP-HPLC and mass spectrometry."],
-              ["Batch Consistency", "Strict process control and in-process monitoring for consistent quality in every batch."],
-              ["Documented Excellence", "Full traceability and documentation at every stage of manufacturing."],
-              ["Continuous Improvement", "Ongoing investment in technology and quality systems."],
+              ["Vetted Manufacturing Partners", "We source from audited, qualified manufacturing partners rather than operating our own synthesis facility."],
+              ["Rigorous Independent Testing", "Every batch is confirmed by third-party analytical testing for identity and purity — RP-HPLC and mass spectrometry."],
+              ["Batch Consistency", "Batch-to-batch specification review before any lot is accepted into our catalogue."],
+              ["Documented Excellence", "Full traceability: every released batch has a Certificate of Analysis you can verify yourself."],
+              ["Continuous Improvement", "Ongoing review of manufacturing partners and testing standards."],
             ].map(([t, d], i) => (
               <Reveal key={t} delay={(i % 3) as 0 | 1 | 2}>
                 <div className="card" style={{ padding: 26, height: "100%" }}>
