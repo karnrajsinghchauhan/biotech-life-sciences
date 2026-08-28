@@ -4,17 +4,13 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import SearchOverlay from "./SearchOverlay"
+import CartDrawer from "./CartDrawer"
 
 const NAV = [
   { href: "/shop", label: "Shop" },
-  { href: "/products", label: "Products" },
-  { href: "/categories", label: "Research Areas" },
-  { href: "/coa", label: "COAs" },
-  { href: "/calculator", label: "Calculator" },
-  { href: "/library", label: "Research Library" },
-  { href: "/wholesale", label: "Wholesale" },
-  { href: "/about", label: "About" },
-  { href: "/faq", label: "FAQ" },
+  { href: "/coa", label: "Verify" },
+  { href: "/library", label: "Research" },
+  { href: "/contact", label: "Support" },
 ]
 
 function Logo() {
@@ -40,6 +36,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [search, setSearch] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
 
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 12)
@@ -49,8 +47,40 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = mobile ? "hidden" : ""
-  }, [mobile])
+    document.body.style.overflow = mobile || cartOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
+  }, [mobile, cartOpen])
+
+  useEffect(() => {
+    let active = true
+    const loadCartCount = async () => {
+      try {
+        const res = await fetch("/api/shopify/cart", { cache: "no-store" })
+        if (!res.ok) return
+        const data = await res.json()
+        if (active) setCartCount(data.cart?.totalQuantity ?? 0)
+      } catch {
+        // Cart access remains available even when the count request is unavailable.
+      }
+    }
+    void loadCartCount()
+
+    const onCartUpdated = (event: Event) => {
+      const count = (event as CustomEvent<{ count?: number }>).detail?.count
+      if (typeof count === "number") setCartCount(count)
+      else void loadCartCount()
+    }
+    window.addEventListener("btls-cart-updated", onCartUpdated)
+    return () => {
+      active = false
+      window.removeEventListener("btls-cart-updated", onCartUpdated)
+    }
+  }, [])
+
+  const openCart = () => {
+    setMobile(false)
+    setCartOpen(true)
+  }
 
   return (
     <>
@@ -63,31 +93,37 @@ export default function Header() {
             ))}
           </nav>
           <div className="header-actions">
-            <button className="icon-btn" aria-label="Search" onClick={() => setSearch(true)}>
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <button className="icon-btn" type="button" aria-label="Search" onClick={() => setSearch(true)}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
             </button>
-            <Link href="/shop" className="icon-btn" aria-label="Shop">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 7h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8Z" /><path d="M9 10V6a3 3 0 0 1 6 0v4" /></svg>
-            </Link>
-            <button className="icon-btn burger" aria-label="Menu" onClick={() => setMobile((v) => !v)}>
+            <button className="icon-btn" type="button" aria-label={`Cart${cartCount ? `, ${cartCount} item${cartCount === 1 ? "" : "s"}` : ""}`} aria-controls="cart-drawer" aria-expanded={cartOpen} onClick={openCart}>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 7h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8Z" /><path d="M9 10V6a3 3 0 0 1 6 0v4" /></svg>
+              {cartCount > 0 && <span className="cart-badge" aria-hidden="true">{cartCount > 99 ? "99+" : cartCount}</span>}
+            </button>
+            <button className="icon-btn burger" type="button" aria-label={mobile ? "Close menu" : "Open menu"} aria-expanded={mobile} onClick={() => setMobile((v) => !v)}>
               {mobile ? (
-                <svg width="17" height="17" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                <svg width="17" height="17" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
               ) : (
-                <svg width="17" height="17" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+                <svg width="17" height="17" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
               )}
             </button>
           </div>
         </div>
       </header>
 
-      <div className={`mobile-menu ${mobile ? "show" : ""}`}>
+      <div className={`mobile-menu ${mobile ? "show" : ""}`} aria-hidden={!mobile}>
+        <button className="mobile-cart-link" type="button" onClick={openCart}>
+          <span>Research cart</span>
+          <span>{cartCount ? `${cartCount} item${cartCount === 1 ? "" : "s"}` : "Empty"}</span>
+        </button>
         {NAV.map((n) => (
           <Link key={n.href} href={n.href} onClick={() => setMobile(false)}>{n.label}</Link>
         ))}
-        <Link href="/products" onClick={() => setMobile(false)} style={{ color: "var(--blue)" }}>Explore Catalogue →</Link>
+        <Link href="/shop" onClick={() => setMobile(false)} style={{ color: "var(--mint)" }}>Enter storefront →</Link>
       </div>
 
       <SearchOverlay open={search} onClose={() => setSearch(false)} />
+      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} onCountChange={setCartCount} />
     </>
   )
 }
