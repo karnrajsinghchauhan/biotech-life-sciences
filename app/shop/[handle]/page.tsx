@@ -6,6 +6,7 @@ import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 import ShopifyBuy from "@/components/ShopifyBuy"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
+import { isAnyVariantAvailable } from "@/lib/availability"
 
 export const revalidate = 300
 
@@ -52,7 +53,7 @@ export default async function ShopProductPage({ params }: { params: { handle: st
               {product.description && <p className="minimal-product-summary">{product.description}</p>}
 
               <div className="minimal-product-facts" aria-label="Purchase information">
-                <span><small>Availability</small>Live stock</span>
+                <span><small>Availability</small>{isAnyVariantAvailable(product.variants) ? "In stock" : "Enquire"}</span>
                 <span><small>Cart</small>Persistent</span>
                 <span><small>Checkout</small>Shopify secured</span>
               </div>
