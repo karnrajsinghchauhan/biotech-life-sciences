@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { render } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import CartDrawer from "./CartDrawer"
 
 beforeEach(() => {
@@ -20,5 +20,51 @@ describe("CartDrawer accessibility", () => {
     render(<CartDrawer open={true} onClose={() => {}} onCountChange={() => {}} />)
     const aside = document.getElementById("cart-drawer")!
     expect(aside.hasAttribute("inert")).toBe(false)
+  })
+})
+
+describe("CartDrawer concurrent mutations", () => {
+  it("ignores a stale response superseded by a newer mutation on the same line", async () => {
+    const cartV1 = {
+      id: "c1", checkoutUrl: "#", totalQuantity: 1,
+      cost: { totalAmount: { amount: "10", currencyCode: "INR" } },
+      lines: [{
+        id: "line-a", quantity: 1,
+        merchandise: {
+          title: "10mg", price: { amount: "10", currencyCode: "INR" },
+          product: { title: "Test Compound", handle: "test", featuredImage: null },
+        },
+      }],
+    }
+    const cartAfterFirstClick = { ...cartV1, totalQuantity: 2, lines: [{ ...cartV1.lines[0], quantity: 2 }] }
+    const cartAfterSecondClick = { ...cartV1, totalQuantity: 3, lines: [{ ...cartV1.lines[0], quantity: 3 }] }
+
+    let patchCall = 0
+    global.fetch = vi.fn(async (url: string, init?: RequestInit) => {
+      if (init?.method === "PATCH") {
+        patchCall += 1
+        const thisCall = patchCall
+        // First PATCH resolves LAST (simulates the out-of-order network response
+        // this bug depends on), second PATCH resolves FIRST.
+        const delayMs = thisCall === 1 ? 30 : 0
+        await new Promise((r) => setTimeout(r, delayMs))
+        const cart = thisCall === 1 ? cartAfterFirstClick : cartAfterSecondClick
+        return { ok: true, json: async () => ({ cart }) }
+      }
+      return { ok: true, json: async () => ({ cart: cartV1 }) }
+    }) as unknown as typeof fetch
+
+    const onCountChange = vi.fn()
+    render(<CartDrawer open={true} onClose={() => {}} onCountChange={onCountChange} />)
+
+    const increment = await screen.findByLabelText(/increase test compound quantity/i)
+    increment.click()
+    increment.click()
+
+    await new Promise((r) => setTimeout(r, 50))
+
+    // The later click's result (quantity 3) must win, not the earlier click's
+    // stale response (quantity 2) arriving after it.
+    expect(await screen.findByText("3")).toBeInTheDocument()
   })
 })

@@ -26,7 +26,8 @@ function money(amount: string, currency: string) {
 export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerProps) {
   const [cart, setCart] = useState<ShopifyCart | null>(null)
   const [loading, setLoading] = useState(false)
-  const [busyLine, setBusyLine] = useState("")
+  const [pendingCount, setPendingCount] = useState(0)
+  const mutationSeq = useRef(0)
   const [error, setError] = useState("")
 
   const refresh = async () => {
@@ -66,43 +67,36 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
     else el.setAttribute("inert", "")
   }, [open])
 
-  const updateLine = async (lineId: string, quantity: number) => {
-    setBusyLine(lineId)
+  const mutate = async (run: () => Promise<Response>) => {
+    const seq = ++mutationSeq.current
+    setPendingCount((n) => n + 1)
     setError("")
     try {
-      const res = await fetch("/api/shopify/cart", {
+      const res = await run()
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || "Could not update your cart")
+      if (seq !== mutationSeq.current) return // a newer mutation already superseded this response
+      const next = data.cart as ShopifyCart
+      setCart(next)
+      onCountChange(next.totalQuantity)
+    } catch (e) {
+      if (seq === mutationSeq.current) setError((e as Error).message)
+    } finally {
+      setPendingCount((n) => n - 1)
+    }
+  }
+
+  const updateLine = (lineId: string, quantity: number) =>
+    mutate(() =>
+      fetch("/api/shopify/cart", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ lineId, quantity }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Could not update your cart")
-      const next = data.cart as ShopifyCart
-      setCart(next)
-      onCountChange(next.totalQuantity)
-    } catch (e) {
-      setError((e as Error).message)
-    } finally {
-      setBusyLine("")
-    }
-  }
+    )
 
-  const removeLine = async (lineId: string) => {
-    setBusyLine(lineId)
-    setError("")
-    try {
-      const res = await fetch(`/api/shopify/cart?lineId=${encodeURIComponent(lineId)}`, { method: "DELETE" })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || "Could not remove that item")
-      const next = data.cart as ShopifyCart
-      setCart(next)
-      onCountChange(next.totalQuantity)
-    } catch (e) {
-      setError((e as Error).message)
-    } finally {
-      setBusyLine("")
-    }
-  }
+  const removeLine = (lineId: string) =>
+    mutate(() => fetch(`/api/shopify/cart?lineId=${encodeURIComponent(lineId)}`, { method: "DELETE" }))
 
   const hasItems = Boolean(cart && cart.lines.length > 0)
 
@@ -145,7 +139,7 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
                 {cart.totalQuantity} item{cart.totalQuantity === 1 ? "" : "s"} selected
               </div>
               {cart.lines.map((line) => {
-                const lineBusy = busyLine === line.id
+                const anyPending = pendingCount > 0
                 return (
                   <div className="cart-row" key={line.id}>
                     <div className="cart-thumb">
@@ -160,14 +154,14 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
                       <div className="small" style={{ marginTop: 2 }}>{line.merchandise.title}</div>
                       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginTop: 10 }}>
                         <div className="qty" aria-label={`Quantity for ${line.merchandise.product.title}`}>
-                          <button type="button" aria-label={`Decrease ${line.merchandise.product.title} quantity`} disabled={lineBusy} onClick={() => void updateLine(line.id, line.quantity - 1)}>−</button>
+                          <button type="button" aria-label={`Decrease ${line.merchandise.product.title} quantity`} disabled={anyPending} onClick={() => void updateLine(line.id, line.quantity - 1)}>−</button>
                           <span aria-live="polite">{line.quantity}</span>
-                          <button type="button" aria-label={`Increase ${line.merchandise.product.title} quantity`} disabled={lineBusy} onClick={() => void updateLine(line.id, line.quantity + 1)}>+</button>
+                          <button type="button" aria-label={`Increase ${line.merchandise.product.title} quantity`} disabled={anyPending} onClick={() => void updateLine(line.id, line.quantity + 1)}>+</button>
                         </div>
                         <strong>{money(line.merchandise.price.amount, line.merchandise.price.currencyCode)}</strong>
                       </div>
-                      <button type="button" className="cart-remove" disabled={lineBusy} onClick={() => void removeLine(line.id)}>
-                        {lineBusy ? "Updating…" : "Remove"}
+                      <button type="button" className="cart-remove" disabled={anyPending} onClick={() => void removeLine(line.id)}>
+                        {anyPending ? "Updating…" : "Remove"}
                       </button>
                     </div>
                   </div>
