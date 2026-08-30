@@ -2,13 +2,15 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { products, bySlug, categoryBySlug } from "@/lib/data"
-import { coaForProduct } from "@/lib/coa"
+import { coaForProduct, param } from "@/lib/coa"
 import Vial from "@/components/Vial"
 import Pen from "@/components/Pen"
 import ProductViewer from "@/components/ProductViewer"
 import ShopifyBuy from "@/components/ShopifyBuy"
 import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 import Reveal from "@/components/Reveal"
+import SpecTable from "@/components/SpecTable"
+import CoaTable, { type CoaRow } from "@/components/CoaTable"
 import { site } from "@/lib/config"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 
@@ -36,6 +38,13 @@ export default async function ProductPage({ params }: { params: { slug: string }
   const currency = shop?.paymentSettings.currencyCode ?? "INR"
   const category = categoryBySlug(product.category)!
   const coas = coaForProduct(product.slug)
+  const coaRows: CoaRow[] = coas.map((c) => ({
+    batch: c.batch,
+    testDate: c.testDate,
+    purity: param(c, "Purity") ?? "Not reported",
+    identity: param(c, "Identity") ?? "Not reported",
+    pdf: c.pdf,
+  }))
 
   return (
     <>
@@ -126,6 +135,13 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <Link href="/coa" className="btn primary">Verify a COA <span aria-hidden="true">↗</span></Link>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="minimal-product-page" style={{ paddingTop: 0 }}>
+        <div className="container" style={{ display: "flex", flexDirection: "column", gap: 24, maxWidth: 900 }}>
+          <SpecTable product={product} />
+          <CoaTable coas={coaRows} />
         </div>
       </section>
     </>
