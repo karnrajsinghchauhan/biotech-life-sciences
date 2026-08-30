@@ -7,7 +7,7 @@ import ShopifyBuy from "@/components/ShopifyBuy"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
 import { isAnyVariantAvailable } from "@/lib/availability"
-import { buildShopifyProductWhatsAppLink } from "@/lib/whatsapp"
+import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 
 export const revalidate = 300
 
@@ -63,14 +63,7 @@ export default async function ShopProductPage({ params }: { params: { handle: st
                 <ShopifyBuy variants={product.variants} currency={currency} />
               </div>
 
-              <a
-                href={buildShopifyProductWhatsAppLink(product.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn ghost wide whatsapp-btn"
-              >
-                Order on WhatsApp
-              </a>
+              <WhatsAppOrderButton title={product.title} className="btn ghost wide" />
 
               <p className="minimal-ruo-notice">{site.disclaimer}</p>
             </div>
