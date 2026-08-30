@@ -5,9 +5,9 @@ import { notFound } from "next/navigation"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 import ShopifyBuy from "@/components/ShopifyBuy"
 import Reveal from "@/components/Reveal"
-import { site } from "@/lib/config"
 import { isAnyVariantAvailable } from "@/lib/availability"
 import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
+import RuoNotice from "@/components/RuoNotice"
 
 export const revalidate = 300
 
@@ -65,7 +65,7 @@ export default async function ShopProductPage({ params }: { params: { handle: st
 
               <WhatsAppOrderButton title={product.title} className="btn ghost wide" />
 
-              <p className="minimal-ruo-notice">{site.disclaimer}</p>
+              <RuoNotice />
             </div>
           </Reveal>
         </div>

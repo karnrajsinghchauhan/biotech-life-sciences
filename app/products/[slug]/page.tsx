@@ -11,7 +11,7 @@ import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 import Reveal from "@/components/Reveal"
 import SpecTable from "@/components/SpecTable"
 import CoaTable, { type CoaRow } from "@/components/CoaTable"
-import { site } from "@/lib/config"
+import RuoNotice from "@/components/RuoNotice"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 
 export function generateStaticParams() {
@@ -108,7 +108,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
               <WhatsAppOrderButton product={product} size={product.sizes[0]} className="btn ghost wide" />
 
-              <p className="minimal-ruo-notice">{site.disclaimer}</p>
+              <RuoNotice />
             </div>
           </Reveal>
         </div>
