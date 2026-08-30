@@ -4,6 +4,7 @@ import { Product, categoryBySlug } from "@/lib/data"
 import { shopCategoryLabel, shopCategoryColor } from "@/lib/shopLabels"
 import Vial from "./Vial"
 import Pen from "./Pen"
+import WhatsAppOrderButton from "./WhatsAppOrderButton"
 
 export default function ShopProductCard({ p }: { p: Product }) {
   const fromPrice = p.sizes[0]?.price
@@ -46,7 +47,8 @@ export default function ShopProductCard({ p }: { p: Product }) {
           <span>from </span>₹{fromPrice?.toLocaleString("en-IN")}
         </div>
         <div className="pcard-actions">
-          <Link href={productHref} className="btn primary sm">View product & buy</Link>
+          <WhatsAppOrderButton product={p} className="btn primary sm" label="Order" />
+          <Link href={productHref} className="btn ghost sm">Details</Link>
         </div>
       </div>
     </article>

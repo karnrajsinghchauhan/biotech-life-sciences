@@ -7,6 +7,7 @@ import Vial from "@/components/Vial"
 import Pen from "@/components/Pen"
 import ProductViewer from "@/components/ProductViewer"
 import ShopifyBuy from "@/components/ShopifyBuy"
+import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 import Reveal from "@/components/Reveal"
 import { site } from "@/lib/config"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
@@ -95,6 +96,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
                   </div>
                 )}
               </div>
+
+              <WhatsAppOrderButton product={product} size={product.sizes[0]} className="btn ghost wide" />
 
               <p className="minimal-ruo-notice">{site.disclaimer}</p>
             </div>
