@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import type { ShopifyCart } from "@/lib/shopify"
 
 type CartDrawerProps = {
@@ -58,6 +58,14 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
     return () => window.removeEventListener("keydown", onKeyDown)
   }, [open])
 
+  const asideRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const el = asideRef.current
+    if (!el) return
+    if (open) el.removeAttribute("inert")
+    else el.setAttribute("inert", "")
+  }, [open])
+
   const updateLine = async (lineId: string, quantity: number) => {
     setBusyLine(lineId)
     setError("")
@@ -102,13 +110,13 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
     <>
       <div className={`overlay ${open ? "show" : ""}`} onClick={onClose} aria-hidden="true" />
       <aside
+        ref={asideRef}
         id="cart-drawer"
         className={`drawer cart-drawer ${open ? "show" : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
         aria-hidden={!open}
-        inert={!open}
       >
         <div className="drawer-head">
           <div>

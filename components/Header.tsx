@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import SearchOverlay from "./SearchOverlay"
 import CartDrawer from "./CartDrawer"
 
@@ -50,6 +50,14 @@ export default function Header() {
     document.body.style.overflow = mobile || cartOpen ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
   }, [mobile, cartOpen])
+
+  const mobileMenuRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const el = mobileMenuRef.current
+    if (!el) return
+    if (mobile) el.removeAttribute("inert")
+    else el.setAttribute("inert", "")
+  }, [mobile])
 
   useEffect(() => {
     let active = true
@@ -111,7 +119,7 @@ export default function Header() {
         </div>
       </header>
 
-      <div className={`mobile-menu ${mobile ? "show" : ""}`} aria-hidden={!mobile}>
+      <div ref={mobileMenuRef} className={`mobile-menu ${mobile ? "show" : ""}`} aria-hidden={!mobile}>
         <button className="mobile-cart-link" type="button" onClick={openCart}>
           <span>Research cart</span>
           <span>{cartCount ? `${cartCount} item${cartCount === 1 ? "" : "s"}` : "Empty"}</span>
