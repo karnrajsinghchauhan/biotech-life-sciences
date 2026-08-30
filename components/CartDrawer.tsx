@@ -161,7 +161,7 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
                         <strong>{money(line.merchandise.price.amount, line.merchandise.price.currencyCode)}</strong>
                       </div>
                       <button type="button" className="cart-remove" disabled={anyPending} onClick={() => void removeLine(line.id)}>
-                        {anyPending ? "Updating…" : "Remove"}
+                        Remove
                       </button>
                     </div>
                   </div>
