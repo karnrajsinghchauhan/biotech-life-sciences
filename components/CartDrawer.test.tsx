@@ -88,3 +88,33 @@ describe("CartDrawer concurrent mutations", () => {
     expect(await screen.findByText("3")).toBeInTheDocument()
   })
 })
+
+describe("CartDrawer error handling", () => {
+  it("shows an error banner above the cart, not instead of it", async () => {
+    const cart = {
+      id: "c1", checkoutUrl: "#", totalQuantity: 1,
+      cost: { totalAmount: { amount: "10", currencyCode: "INR" } },
+      lines: [{
+        id: "line-a", quantity: 1,
+        merchandise: {
+          title: "10mg", price: { amount: "10", currencyCode: "INR" },
+          product: { title: "Test Compound", handle: "test", featuredImage: null },
+        },
+      }],
+    }
+    let call = 0
+    global.fetch = vi.fn(async (_url: string, init?: RequestInit) => {
+      call += 1
+      if (init?.method === "PATCH") return { ok: false, json: async () => ({ error: "Network error" }) }
+      return { ok: true, json: async () => ({ cart }) }
+    }) as unknown as typeof fetch
+
+    render(<CartDrawer open={true} onClose={() => {}} onCountChange={() => {}} />)
+    const increment = await screen.findByLabelText(/increase test compound quantity/i)
+    increment.click()
+
+    expect(await screen.findByRole("alert")).toHaveTextContent("Network error")
+    // The cart line must still be visible — the error is additive, not a replacement.
+    expect(screen.getByText("Test Compound")).toBeInTheDocument()
+  })
+})

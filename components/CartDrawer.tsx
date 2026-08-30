@@ -123,10 +123,9 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
         </div>
 
         <div className="drawer-body">
+          {error && <div className="notice" role="alert" style={{ marginBottom: 14 }}>{error}</div>}
           {loading ? (
             <p className="small" role="status" aria-live="polite">Loading your cart…</p>
-          ) : error ? (
-            <div className="notice" role="alert">{error}</div>
           ) : !cart || cart.lines.length === 0 ? (
             <div style={{ padding: "32px 0" }}>
               <p style={{ fontWeight: 700, fontSize: 18 }}>Your cart is empty.</p>
