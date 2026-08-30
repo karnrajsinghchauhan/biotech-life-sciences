@@ -7,6 +7,10 @@ const PRIMARY = [
   ["Verify a COA", "/coa"],
   ["Research library", "/library"],
   ["Wholesale", "/wholesale"],
+  ["About us", "/about"],
+  ["FAQ", "/faq"],
+  ["Dilution calculator", "/calculator"],
+  ["Our standards", "/quality"],
 ]
 
 const LEGAL = [
@@ -15,6 +19,7 @@ const LEGAL = [
   ["Returns", "/returns"],
   ["Privacy", "/privacy"],
   ["Terms", "/terms"],
+  ["Disclaimer", "/disclaimer"],
 ]
 
 export default function Footer() {
