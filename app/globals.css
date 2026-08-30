@@ -1045,7 +1045,6 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing:
 .minimal-buy-card { width: 100%; margin-top: 24px; padding: 24px; background: #0e1110; border: 1px solid var(--line); }
 .minimal-unlisted { display: flex; flex-direction: column; gap: 16px; }
 .minimal-unlisted p { color: var(--muted); font-size: 13px; }
-.minimal-ruo-notice { margin-top: 16px; color: var(--muted); font-size: 10.5px; line-height: 1.6; }
 .minimal-product-evidence { padding: 100px 0; background: var(--bone); color: var(--ink-dark); }
 .minimal-product-evidence .minimal-kicker { color: #26785a; }
 .minimal-product-evidence-grid { display: grid; grid-template-columns: 1fr 0.82fr; gap: clamp(48px,9vw,130px); align-items: center; }
