@@ -1,8 +1,16 @@
 import Link from "next/link"
 import Reveal from "./Reveal"
 import { buildGeneralWhatsAppLink } from "@/lib/whatsapp"
+import { site } from "@/lib/config"
 
 const ITEMS = [
+  {
+    emoji: "🎓",
+    title: `Supplying research since ${site.founded}`,
+    body: `${new Date().getFullYear() - site.founded}+ years serving laboratories, universities and institutional researchers with consistent, documented supply.`,
+    href: "/about",
+    cta: "About us",
+  },
   {
     emoji: "🧾",
     title: "Batch-documented, every time",

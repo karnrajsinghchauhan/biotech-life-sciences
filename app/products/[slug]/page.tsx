@@ -97,6 +97,14 @@ export default async function ProductPage({ params }: { params: { slug: string }
               <h1 style={{ fontSize: "clamp(30px,3.6vw,44px)" }}>{p.name}</h1>
               {p.altName && <p className="small" style={{ fontSize: 15 }}>{p.altName}</p>}
               <p style={{ color: "var(--ink-2)", fontSize: 15.5 }}>{p.overview}</p>
+              <div>
+                <span className="small" style={{ fontWeight: 600, color: "var(--ink)" }}>Common research uses</span>
+                <div className="pill-row" style={{ marginTop: 8 }}>
+                  {p.research.map((r) => (
+                    <span key={r} className="pill">{r}</span>
+                  ))}
+                </div>
+              </div>
               <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "4px 0 8px" }}>
                 {coas.length > 0
                   ? <span className="chip doc">✓ COA Available — {coas.length} released batch{coas.length > 1 ? "es" : ""}</span>
