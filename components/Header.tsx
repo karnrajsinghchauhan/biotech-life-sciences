@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import SearchOverlay from "./SearchOverlay"
 import CartDrawer from "./CartDrawer"
 
@@ -52,7 +52,7 @@ export default function Header() {
   }, [mobile, cartOpen])
 
   const mobileMenuRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = mobileMenuRef.current
     if (!el) return
     if (mobile) el.removeAttribute("inert")

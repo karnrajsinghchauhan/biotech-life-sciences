@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import type { ShopifyCart } from "@/lib/shopify"
 
 type CartDrawerProps = {
@@ -59,7 +59,7 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
   }, [open])
 
   const asideRef = useRef<HTMLElement>(null)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = asideRef.current
     if (!el) return
     if (open) el.removeAttribute("inert")
