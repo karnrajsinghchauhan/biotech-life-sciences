@@ -1,0 +1,21 @@
+{
+  "summary": "Frontend smoke and interaction testing completed across desktop and mobile. Core shopping flows passed; mobile homepage has horizontal overflow.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Mobile homepage hero", "issue": "Horizontal overflow at 390px viewport: document scrollWidth is 432px. The .hero-copy grid item expands beyond viewport (right edge 432px), likely due intrinsic min-width on the desktop grid item.", "selector": ".hero-copy", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": ["Set mobile hero grid children min-width: 0 or otherwise constrain .hero-copy so 390px layouts do not overflow horizontally."],
+  "critical_code_review_comments": ["The mobile breakpoint does not fully constrain the two-column hero grid item's intrinsic width, violating the no-horizontal-overflow requirement."],
+  "updated_files": ["/app/test_reports/iteration_1.json"],
+  "success_rate": {"backend": "not tested (frontend-only request)", "frontend": "94%"},
+  "seed_data_creation": "None; localStorage cart and wishlist state used.",
+  "retest_needed": true,
+  "should_call_test_agent_after_fix": true,
+  "context_for_next_testing_agent": "Age gate, 25-product catalogue, filters/sorting, search, wishlist, cart quantity/drawer, checkout demo, informational/legal routes, and mobile menu passed. Retest mobile overflow after CSS fix; browser console had no reported runtime errors.",
+  "rca of the issue": "At 390px, .hero is display:grid and .hero-copy retains an intrinsic width of 412px (right edge 432px from 20px left), causing document scrollWidth 432px. Add min-width:0 to mobile grid children and verify long content/actions wrap within the viewport."
+}

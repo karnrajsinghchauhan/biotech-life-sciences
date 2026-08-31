@@ -1,0 +1,74 @@
+{
+  "project_name": "Biotech Lifesciences E-Commerce Platform",
+  "reference_url": "https://supremepeptides.in/",
+  "context": "e-commerce & research platform for high-purity peptides, proteins, and laboratory materials",
+  "design_system": {
+    "archetype": "SWISS & HIGH-CONTRAST / PERFORMANCE PRO (Precision Biotech Lab)",
+    "color_palette": {
+      "bg_void": "#05070A",
+      "bg_card": "#080B10",
+      "bg_subtle": "#0B0F15",
+      "bg_elevated": "#0E131B",
+      "text_primary": "#FFFFFF",
+      "text_secondary": "#F3F6FA",
+      "text_muted": "#8D98A8",
+      "brand_primary": "#1769FF",
+      "brand_hover": "#287BFF",
+      "brand_dark": "#0B3D91",
+      "brand_accent": "#5B9CFF",
+      "border_subtle": "rgba(23, 105, 255, 0.15)",
+      "border_active": "rgba(23, 105, 255, 0.4)"
+    },
+    "typography": {
+      "font_family_heading": "Outfit, sans-serif",
+      "font_family_body": "Inter, sans-serif",
+      "font_family_mono": "JetBrains Mono, monospace"
+    }
+  },
+  "image_urls": {
+    "hero_laboratory": "https://images.unsplash.com/photo-1579165466741-7f35e4755660?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwxfHxibHVlJTIwZ2xhc3MlMjBsYWJvcmF0b3J5JTIwdmlhbCUyMG1lZGljaW5lJTIwc2NpZW5jZXxlbnwwfHx8fDE3ODgxODI5OTh8MA&ixlib=rb-4.1.0&q=85",
+    "vial_product_1": "https://images.unsplash.com/photo-1544991875-5dc1b05f607d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwzfHxibHVlJTIwZ2xhc3MlMjBsYWJvcmF0b3J5JTIwdmlhbCUyMG1lZGljaW5lJTIwc2NpZW5jZXxlbnwwfHx8fDE3ODgxODI5OTh8MA&ixlib=rb-4.1.0&q=85",
+    "microscope_lab": "https://images.unsplash.com/photo-1766297248084-b32bacb4a1e4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHwzfHxsYWJvcmF0b3J5JTIwbWljcm9zY29wZSUyMGJsdWUlMjBzY2llbmNlJTIwcmVzZWFyY2h8ZW58MHx8fHwxNzg4MTgyOTk4fDA&ixlib=rb-4.1.0&q=85",
+    "test_tubes": "https://images.unsplash.com/photo-1675336753554-5493966a6970?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTJ8MHwxfHNlYXJjaHwyfHxibHVlJTIwZ2xhc3MlMjBsYWJvcmF0b3J5JTIwdmlhbCUyMG1lZGljaW5lJTIwc2NpZW5jZXxlbnwwfHx8fDE3ODgxODI5OTh8MA&ixlib=rb-4.1.0&q=85"
+  },
+  "required_routes": [
+    "/",
+    "/products",
+    "/products/[slug]",
+    "/collections",
+    "/collections/[slug]",
+    "/blog",
+    "/blog/[slug]",
+    "/about",
+    "/quality",
+    "/shipping",
+    "/contact",
+    "/wishlist",
+    "/account",
+    "/cart",
+    "/checkout",
+    "/privacy",
+    "/terms",
+    "/disclaimer",
+    "/research-use-policy"
+  ],
+  "required_features": [
+    "Age Verification Modal",
+    "Sticky Desktop/Mobile Navigation with Search overlay",
+    "Centralized siteConfig / products / collections / articles state",
+    "Product Cards with variant selector, wishlist toggle, add-to-cart, buy-now",
+    "Cart Drawer & Full Cart Page with local persistence",
+    "Advanced product filters and sorting",
+    "Collection Detail & Blog views",
+    "Informational pages (About, Quality & HPLC, Shipping, Contact, Legal)",
+    "Demo Checkout & Account UI with non-functional payment badge",
+    "Responsive mobile layouts and full accessibility data-testid attributes"
+  ],
+  "universal_guidelines": {
+    "no_purple_violet_pink_orange_gold": true,
+    "color_palette_strict": "Only #05070A, #080B10, #0B0F15, #0E131B, #FFFFFF, #F3F6FA, #1769FF, #287BFF, #0B3D91, #5B9CFF, #8D98A8",
+    "no_transparent_overlays_without_blur": true,
+    "mandatory_data_testid": true,
+    "research_use_disclaimer_required": true
+  }
+}
