@@ -1,4 +1,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html{background:#05070a;scroll-behavior:smooth}body{margin:0;min-width:320px}::selection{background:#1769ff;color:#fff}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #5b9cff;outline-offset:3px}
+html{background:#050505;scroll-behavior:smooth}body{margin:0;min-width:320px}::selection{background:#fff;color:#000}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #fff;outline-offset:3px}
