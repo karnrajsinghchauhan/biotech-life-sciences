@@ -12,6 +12,7 @@ import Reveal from "@/components/Reveal"
 import SpecTable from "@/components/SpecTable"
 import CoaTable, { type CoaRow } from "@/components/CoaTable"
 import RuoNotice from "@/components/RuoNotice"
+import TopResearchAreas from "@/components/TopResearchAreas"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 
 export function generateStaticParams() {
@@ -92,6 +93,8 @@ export default async function ProductPage({ params }: { params: { slug: string }
                 <span><small>Purity</small>{product.purity || "Batch verified"}</span>
                 <span><small>Form</small>{product.form}</span>
               </div>
+
+              <TopResearchAreas research={product.research} />
 
               <div className="minimal-buy-card">
                 {shopifyProduct && shopifyProduct.variants.length > 0 ? (
