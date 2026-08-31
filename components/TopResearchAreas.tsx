@@ -6,7 +6,7 @@ export default function TopResearchAreas({ research }: { research: string[] }) {
       <ol>
         {top3.map((area, i) => (
           <li key={area}>
-            <span className="top-research-num">{String(i + 1).padStart(2, "0")}</span>
+            <span className="top-research-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
             <span>{area}</span>
           </li>
         ))}

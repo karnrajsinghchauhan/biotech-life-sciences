@@ -9,6 +9,9 @@ describe("TopResearchAreas", () => {
     expect(screen.getByText("Area B")).toBeInTheDocument()
     expect(screen.getByText("Area C")).toBeInTheDocument()
     expect(screen.queryByText("Area D")).not.toBeInTheDocument()
+    expect(screen.getByText("01")).toBeInTheDocument()
+    expect(screen.getByText("02")).toBeInTheDocument()
+    expect(screen.getByText("03")).toBeInTheDocument()
   })
 
   it("numbers each area 01/02/03", () => {
