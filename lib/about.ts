@@ -5,27 +5,13 @@ export type AboutStat = { value: string; label: string }
 export type AboutValue = { title: string; body: string }
 
 export const aboutContent = {
-  heroLead:
-    `Biotech Life Sciences has supplied documented research peptides since ${site.founded}, from ` +
-    `${site.location}. Every batch that reaches a researcher is traceable back through a Certificate ` +
-    `of Analysis to the partner that made it and the checks it passed before release.`,
+  heroLead: `Biotech Life Sciences has supplied documented research peptides since ${site.founded}, from ${site.location}. Every batch that reaches a researcher is traceable back through a Certificate of Analysis to the partner that made it and the checks it passed before release.`,
 
-  sourcingParagraph:
-    "We don't operate the synthesis line. Every compound is made by an audited, vetted manufacturing " +
-    "partner and characterized before it's accepted into our catalogue — we build trust through the " +
-    "documentation that follows each batch, not through claiming a factory we don't run.",
+  sourcingParagraph: "We don't operate the synthesis line. Every compound is made by an audited, vetted manufacturing partner and characterized before it's accepted into our catalogue — we build trust through the documentation that follows each batch, not through claiming a factory we don't run.",
 
-  facilityParagraph:
-    "What we do operate is our own facility in Oxford. Every batch that clears a partner's release is " +
-    "received, quality-checked against its own Certificate of Analysis, repackaged and labeled for " +
-    "dispatch, and stored there until it ships — the synthesis happens with our partners, the final " +
-    "check and everything after it happens with us.",
+  facilityParagraph: "What we do operate is our own facility in Oxford. Every batch that clears a partner's release is received, quality-checked against its own Certificate of Analysis, repackaged and labeled for dispatch, and stored there until it ships — the synthesis happens with our partners, the final check and everything after it happens with us.",
 
-  testingParagraph:
-    "Purity and identity are confirmed by RP-HPLC and mass spectrometry on every released batch, the " +
-    "same as any credible research supplier. Beyond that baseline, batches are also screened for heavy " +
-    "metals and for endotoxins and residual solvents — the panel most suppliers stop short of, and the " +
-    "one that actually determines whether a research material is safe to bring into a lab at all.",
+  testingParagraph: "Purity and identity are confirmed by RP-HPLC and mass spectrometry on every released batch, the same as any credible research supplier. Beyond that baseline, batches are also screened for heavy metals and for endotoxins and residual solvents — the panel most suppliers stop short of, and the one that actually determines whether a research material is safe to bring into a lab at all.",
 
   stats: [
     { value: String(site.founded), label: "Supplying research peptides since" },
