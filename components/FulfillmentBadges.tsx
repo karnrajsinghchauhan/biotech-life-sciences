@@ -11,7 +11,7 @@ export default function FulfillmentBadges() {
         <span className="fulfillment-badge-dot" aria-hidden="true" />
         48-hour dispatch guarantee
       </span>
-      <span role="listitem" className="fulfillment-badge-item">
+      <span role="listitem">
         <a className="fulfillment-badge fulfillment-badge-link" href={`${site.url}/account/orders`}>
           <span className="fulfillment-badge-dot" aria-hidden="true" />
           Track your order
