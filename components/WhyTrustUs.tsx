@@ -7,7 +7,7 @@ const REASONS = [
   },
   {
     title: "Testing beyond the baseline",
-    body: "HPLC purity and mass-spectrometry identity on every batch, plus heavy metal and endotoxin/residual-solvent screening.",
+    body: "HPLC purity and mass-spectrometry identity on every batch, plus heavy-metal and endotoxin/residual-solvent screening.",
   },
   {
     title: "A COA for every batch",
@@ -28,11 +28,8 @@ export default function WhyTrustUs() {
             <Reveal key={r.title} delay={(i % 3) as 0 | 1 | 2}>
               <div className="card why-trust-card" style={{ padding: 26, height: "100%" }}>
                 <span className="why-trust-icon" aria-hidden="true" />
-                <p className="small why-trust-text">
-                  {r.title}
-                  <br />
-                  {r.body}
-                </p>
+                <h3 style={{ fontSize: 17, margin: "14px 0 8px" }}>{r.title}</h3>
+                <p className="small">{r.body}</p>
               </div>
             </Reveal>
           ))}

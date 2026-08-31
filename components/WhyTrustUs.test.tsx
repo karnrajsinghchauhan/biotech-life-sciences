@@ -5,9 +5,9 @@ import WhyTrustUs from "./WhyTrustUs"
 describe("WhyTrustUs", () => {
   it("states the three real, verified trust facts", () => {
     render(<WhyTrustUs />)
-    expect(screen.getByText(/oxford/i)).toBeInTheDocument()
-    expect(screen.getByText(/heavy metal/i)).toBeInTheDocument()
-    expect(screen.getByText(/certificate of analysis|coa/i)).toBeInTheDocument()
+    expect(screen.getAllByText(/oxford/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/heavy[- ]metal/i).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/certificate of analysis|coa/i).length).toBeGreaterThan(0)
   })
 
   it("does not claim we operate the synthesis line", () => {
