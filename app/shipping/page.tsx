@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 }
 
 const SECTIONS: [string, string][] = [
-  ["Dispatch", `Orders are dispatched after payment confirmation. ${shipping.dispatchNote}`],
+  ["Dispatch", shipping.dispatchNote],
   ["Tracking", "Every consignment ships with full tracking information. Your tracking number is emailed at dispatch, so you have complete visibility from dispatch to your door."],
   ["Packaging", "Products ship in tamper-evident, high-density protective packaging with temperature-stable insulation to maintain product integrity in transit. Outer packaging is plain and discreet."],
   ["International shipping", "We deliver to researchers worldwide. International shipments follow IATA guidelines and are fully insured. Buyers are responsible for confirming that importation of research materials is permitted in their jurisdiction; any duties or import taxes are the buyer's responsibility."],

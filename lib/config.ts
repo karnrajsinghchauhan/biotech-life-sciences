@@ -24,6 +24,6 @@ export const site = {
 export const shipping = {
   freeAbove: 15000, // INR
   flatRate: 450, // INR
-  dispatchNote: "Orders are dispatched after payment confirmation. Dispatch and delivery estimates are confirmed with your order confirmation.",
+  dispatchNote: "Orders are dispatched within 48 hours of payment confirmation. Delivery time after dispatch varies by destination.",
   international: true,
 }
