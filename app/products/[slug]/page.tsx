@@ -13,6 +13,7 @@ import SpecTable from "@/components/SpecTable"
 import CoaTable, { type CoaRow } from "@/components/CoaTable"
 import RuoNotice from "@/components/RuoNotice"
 import TopResearchAreas from "@/components/TopResearchAreas"
+import FulfillmentBadges from "@/components/FulfillmentBadges"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 
 export function generateStaticParams() {
@@ -95,6 +96,7 @@ export default async function ProductPage({ params }: { params: { slug: string }
               </div>
 
               <TopResearchAreas research={product.research} />
+              <FulfillmentBadges />
 
               <div className="minimal-buy-card">
                 {shopifyProduct && shopifyProduct.variants.length > 0 ? (

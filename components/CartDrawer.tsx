@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import type { ShopifyCart } from "@/lib/shopify"
+import FulfillmentBadges from "./FulfillmentBadges"
 
 type CartDrawerProps = {
   open: boolean
@@ -176,6 +177,7 @@ export default function CartDrawer({ open, onClose, onCountChange }: CartDrawerP
               <span className="small">Estimated total</span>
               <strong>{money(cart.cost.totalAmount.amount, cart.cost.totalAmount.currencyCode)}</strong>
             </div>
+            <FulfillmentBadges />
             <a href={cart.checkoutUrl} className="btn primary wide">Checkout securely with Shopify →</a>
             <p className="small" style={{ marginTop: 10 }}>Payment, delivery options and tax are handled securely by Shopify Checkout.</p>
           </div>
