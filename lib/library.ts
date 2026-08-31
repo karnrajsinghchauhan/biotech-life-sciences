@@ -118,6 +118,45 @@ export const articles: Article[] = [
       "RUO: Research Use Only — the supply framework under which laboratory materials are sold.",
     ],
   },
+  {
+    slug: "reconstitution-math-for-research-use",
+    title: "Reconstitution Math for Research Use",
+    category: "Peptide Fundamentals", minutes: 5,
+    diagram: "dilution",
+    summary: "The arithmetic behind turning a lyophilized vial into a working solution — laboratory math, not a dosing guide.",
+    body: [
+      "Reconstitution is arithmetic, not judgment: a known mass of lyophilized peptide, dissolved in a known volume of diluent, produces a known concentration. Everything downstream in a research protocol depends on getting this one calculation right.",
+      "The core relationship is concentration = mass ÷ volume. A 10 mg vial reconstituted with 2 mL of diluent produces a 5 mg/mL solution — 10 divided by 2. Add more diluent and the concentration drops; add less and it rises, in strict inverse proportion.",
+      "The reverse calculation is just as common: given a vial's mass and a target concentration, the required diluent volume is mass ÷ target concentration. A 10 mg vial targeting 5 mg/mL needs 2 mL of diluent — the same relationship, solved for the other variable.",
+      "This is laboratory arithmetic for research use only. It does not recommend, calculate, or imply any dose, protocol, or administration route for humans or animals — see our Reconstitution Calculator for a working version of this same math.",
+    ],
+  },
+  {
+    slug: "understanding-evidence-levels",
+    title: "Understanding Evidence Levels in Peptide Research",
+    category: "Research Terminology", minutes: 6,
+    diagram: "evidence-level",
+    summary: "How to read the evidence-strength badge shown against every research application on this site.",
+    body: [
+      "Not all published research carries the same weight, and a serious catalogue says so plainly rather than treating every citation as equally strong. This site uses one consistent five-level scale, applied to a specific compound-application pair — never to a compound in general.",
+      "Established means the effect is well-replicated across independent studies for that specific application. Clinical means human trial data exists, even if limited in scale or not yet leading to approval. Investigational means early-phase human data exists but the picture is incomplete.",
+      "Preclinical means the evidence comes from animal or cell-culture models — informative for research design, but not yet tested in humans for that application. Limited means the available evidence is thin, mixed, or drawn from a narrow set of sources, and is labeled that way rather than dressed up.",
+      "A compound can sit at different levels for different applications simultaneously — strong evidence for one mechanism and thin evidence for another is normal, not a contradiction. Reading the level next to the specific application, not just the compound name, is the whole point of the system.",
+    ],
+  },
+  {
+    slug: "peptide-bioregulators",
+    title: "Peptide Bioregulators: Origins and Evidence Context",
+    category: "Compound Directory", minutes: 6,
+    diagram: "bioregulator-class",
+    summary: "A distinct research lineage — six catalogue compounds, and an honest account of where the literature comes from.",
+    body: [
+      "Peptide bioregulators are a class of short synthetic peptides originally developed through a specific line of Russian gerontology research, studied for tissue-specific regulatory effects in preclinical models. Epitalon, Pinealon, Cartalax, Chonluten, Cortagen and Pancregen all belong to this class.",
+      "Each compound in the class is associated with a particular tissue or organ system in the originating research program — the naming generally reflects that focus rather than a mechanism confirmed by independent replication.",
+      "The evidence base for this class is concentrated in a comparatively small number of research groups and publications, most originating from the same laboratories that developed the compounds. Independent, Western-language replication is limited relative to better-studied compound classes on this site.",
+      "That concentration of sourcing doesn't mean the research doesn't exist — it means readers should weight it accordingly. Treat this class the way the evidence-level system treats anything labeled preclinical or limited: as a starting point for further reading, not as a settled result.",
+    ],
+  },
 ]
 
 export const articleBySlug = (slug: string) => articles.find((a) => a.slug === slug)

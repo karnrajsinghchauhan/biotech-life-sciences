@@ -19,3 +19,22 @@ describe("library article diagrams", () => {
     }
   })
 })
+
+describe("new library articles", () => {
+  const newSlugs = ["reconstitution-math-for-research-use", "understanding-evidence-levels", "peptide-bioregulators"]
+
+  it("all 3 new articles exist with a diagram assigned", () => {
+    for (const slug of newSlugs) {
+      const article = articles.find((a) => a.slug === slug)
+      expect(article).toBeDefined()
+      expect(article?.diagram).toBeTruthy()
+      expect(article?.body.length).toBeGreaterThan(2)
+    }
+  })
+
+  it("the reconstitution article stays laboratory-math framing, never a dosing instruction", () => {
+    const article = articles.find((a) => a.slug === "reconstitution-math-for-research-use")!
+    const text = article.body.join(" ").toLowerCase()
+    expect(text).not.toMatch(/\brecommended dose\b|\badminister\b|\binject\b/)
+  })
+})
