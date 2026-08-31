@@ -1073,3 +1073,12 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing:
   .support-panel { right: 14px; bottom: 66px; }
   .minimal-cookie { left: 14px; bottom: 14px; max-width: calc(100vw - 84px); }
 }
+
+.why-trust-card { position: relative; overflow: hidden; }
+.why-trust-icon {
+  display: block; width: 34px; height: 34px; border-radius: 10px;
+  background: var(--glow-gradient);
+  box-shadow: 0 0 0 1px var(--line), 0 0 18px rgba(159, 232, 213, 0.35);
+}
+.why-trust-text { margin: 14px 0 0; line-height: 1.55; }
+.why-trust-text::first-line { font-size: 17px; font-weight: 600; color: var(--ink); }
