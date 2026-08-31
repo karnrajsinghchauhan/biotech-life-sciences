@@ -107,16 +107,6 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; letter-spacing:
 .btn.wide { width: 100%; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
-/* ---- announcement bar ---- */
-.annbar {
-  background: var(--navy); color: rgba(255,255,255,0.92);
-  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
-  overflow: hidden; white-space: nowrap; position: relative;
-}
-.annbar-track { display: inline-flex; gap: 48px; padding: 9px 0; animation: marquee 40s linear infinite; }
-.annbar-track span { display: inline-flex; align-items: center; gap: 48px; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
 /* ---- header ---- */
 .header {
   position: sticky; top: 0; z-index: 90;
