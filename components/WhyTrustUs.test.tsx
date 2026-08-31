@@ -14,4 +14,11 @@ describe("WhyTrustUs", () => {
     render(<WhyTrustUs />)
     expect(screen.queryByText(/we synthesize|our synthesis/i)).not.toBeInTheDocument()
   })
+
+  it("renders each trust reason as a real heading, not a merged paragraph", () => {
+    render(<WhyTrustUs />)
+    expect(screen.getByRole("heading", { level: 3, name: /our own oxford facility/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 3, name: /testing beyond the baseline/i })).toBeInTheDocument()
+    expect(screen.getByRole("heading", { level: 3, name: /a coa for every batch/i })).toBeInTheDocument()
+  })
 })

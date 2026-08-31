@@ -1,19 +1,5 @@
 import Reveal from "./Reveal"
-
-const REASONS = [
-  {
-    title: "Our own Oxford facility",
-    body: "Every released batch is received, quality-checked, repackaged and stored at our facility in Oxford before it ships.",
-  },
-  {
-    title: "Testing beyond the baseline",
-    body: "HPLC purity and mass-spectrometry identity on every batch, plus heavy-metal and endotoxin/residual-solvent screening.",
-  },
-  {
-    title: "A COA for every batch",
-    body: "Batch number, purity and identity — checkable independently on the COA Verification page, not just asserted on this one.",
-  },
-]
+import { aboutContent } from "@/lib/about"
 
 export default function WhyTrustUs() {
   return (
@@ -24,7 +10,7 @@ export default function WhyTrustUs() {
           <h2 className="h-section">What actually backs that up</h2>
         </Reveal>
         <div className="grid-3" style={{ marginTop: 26 }}>
-          {REASONS.map((r, i) => (
+          {aboutContent.trustReasons.map((r, i) => (
             <Reveal key={r.title} delay={(i % 3) as 0 | 1 | 2}>
               <div className="card why-trust-card" style={{ padding: 26, height: "100%" }}>
                 <span className="why-trust-icon" aria-hidden="true" />

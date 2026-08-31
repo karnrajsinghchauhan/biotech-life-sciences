@@ -33,4 +33,19 @@ export const aboutContent = {
       body: "Synthesis happens with our partners. QC, repackaging, storage and dispatch happen at our own Oxford facility.",
     },
   ] satisfies AboutValue[],
+
+  trustReasons: [
+    {
+      title: "Our own Oxford facility",
+      body: "Every released batch is received, quality-checked, repackaged and stored at our facility in Oxford before it ships.",
+    },
+    {
+      title: "Testing beyond the baseline",
+      body: "HPLC purity and mass-spectrometry identity on every batch, plus heavy-metal and endotoxin/residual-solvent screening.",
+    },
+    {
+      title: "A COA for every batch",
+      body: "Batch number, purity and identity — checkable independently on the COA Verification page, not just asserted on this one.",
+    },
+  ] satisfies AboutValue[],
 }

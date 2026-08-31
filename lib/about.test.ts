@@ -33,4 +33,8 @@ describe("about page content", () => {
     expect(labels.some((l) => l.includes("countries"))).toBe(false)
     expect(labels.some((l) => l.includes("years of excellence"))).toBe(false)
   })
+
+  it("has the three trust reasons used by the WhyTrustUs section", () => {
+    expect(aboutContent.trustReasons).toHaveLength(3)
+  })
 })
