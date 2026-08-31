@@ -1,3 +1,5 @@
+import type { DiagramKey } from "@/components/diagrams"
+
 export type Article = {
   slug: string
   title: string
@@ -5,7 +7,7 @@ export type Article = {
   minutes: number
   summary: string
   body: string[] // paragraphs
-  diagram?: string // key into components/diagrams/index.ts's DIAGRAM_COMPONENTS
+  diagram?: DiagramKey
 }
 
 export const articles: Article[] = [
