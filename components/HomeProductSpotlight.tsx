@@ -69,9 +69,8 @@ export default function HomeProductSpotlight({ products }: { products: Spotlight
             width={620}
             height={1343}
             sizes="(max-width: 760px) 64vw, 420px"
-            priority={active === 0}
           />
-          <span className="spotlight-code" aria-hidden="true">{String(active + 1).padStart(2, "0")} / 04</span>
+          <span className="spotlight-code" aria-hidden="true">{String(active + 1).padStart(2, "0")} / {String(products.length).padStart(2, "0")}</span>
         </Link>
       </div>
     </div>
