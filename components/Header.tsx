@@ -23,7 +23,7 @@ function Logo() {
         width={360}
         height={321}
         priority
-        style={{ width: "auto", height: 30 }}
+        style={{ width: "auto", height: 40 }}
       />
       <span>
         Biotech<small>Life Sciences</small>
