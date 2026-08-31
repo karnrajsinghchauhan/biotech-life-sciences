@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import "./globals.css"
-import AnnouncementBar from "@/components/AnnouncementBar"
 import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import SupportWidget from "@/components/SupportWidget"
@@ -81,7 +80,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
         />
         <a href="#main" className="skip-link">Skip to content</a>
-        <AnnouncementBar />
         <Header />
         <main id="main">{children}</main>
         <Footer />

@@ -8,14 +8,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date()
 
   const stat = [
-    "", "/products", "/categories", "/coa", "/batch-reports", "/library",
-    "/about", "/quality", "/wholesale", "/contact", "/faq", "/shipping",
+    "", "/shop", "/products", "/categories", "/coa", "/batch-reports", "/library",
+    "/about", "/quality", "/wholesale", "/contact", "/faq", "/calculator", "/shipping",
     "/returns", "/privacy", "/terms", "/disclaimer", "/research-use-only",
   ].map((p) => ({
     url: `${base}${p}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
-    priority: p === "" ? 1 : p === "/products" ? 0.9 : 0.6,
+    priority: p === "" ? 1 : p === "/shop" || p === "/products" ? 0.9 : 0.6,
   }))
 
   return [

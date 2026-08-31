@@ -27,3 +27,8 @@ export function buildGeneralWhatsAppLink(): string {
   const text = "Hi, I have a question about a research compound in the Biotech Life Sciences catalogue."
   return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
 }
+
+export function buildShopifyProductWhatsAppLink(title: string): string {
+  const text = `Hi, I'd like to order:\n\n${title}\n\n${RUO_LINE}`
+  return `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`
+}

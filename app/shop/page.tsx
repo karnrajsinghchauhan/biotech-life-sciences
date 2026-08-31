@@ -42,6 +42,11 @@ export default async function ShopPage() {
             Products, stock and pricing are managed in Shopify. Checkout and payments are handled
             securely by Shopify Checkout.
           </p>
+          <div className="shop-steps" aria-label="How ordering works">
+            <span><b>01</b> Choose a size</span>
+            <span><b>02</b> Add to cart</span>
+            <span><b>03</b> Checkout securely</span>
+          </div>
         </div>
       </section>
 

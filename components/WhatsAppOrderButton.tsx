@@ -1,11 +1,16 @@
 "use client"
 
 import { Product, Size } from "@/lib/data"
-import { buildWhatsAppOrderLink, buildBundleWhatsAppLink } from "@/lib/whatsapp"
+import {
+  buildWhatsAppOrderLink,
+  buildBundleWhatsAppLink,
+  buildShopifyProductWhatsAppLink,
+} from "@/lib/whatsapp"
 
-type SingleProps = { product: Product; size?: Size; products?: undefined }
-type BundleProps = { products: Product[]; product?: undefined; size?: undefined }
-type Props = (SingleProps | BundleProps) & { label?: string; className?: string }
+type SingleProps = { product: Product; size?: Size; products?: undefined; title?: undefined }
+type BundleProps = { products: Product[]; product?: undefined; size?: undefined; title?: undefined }
+type ShopifyProps = { title: string; product?: undefined; products?: undefined; size?: undefined }
+type Props = (SingleProps | BundleProps | ShopifyProps) & { label?: string; className?: string }
 
 function WhatsAppGlyph() {
   return (
@@ -19,7 +24,9 @@ export default function WhatsAppOrderButton(props: Props) {
   const { label, className = "btn primary sm wide" } = props
   const href = props.products
     ? buildBundleWhatsAppLink(props.products)
-    : buildWhatsAppOrderLink(props.product, props.size)
+    : props.title
+    ? buildShopifyProductWhatsAppLink(props.title)
+    : buildWhatsAppOrderLink(props.product as Product, props.size)
 
   return (
     <a href={href} target="_blank" rel="noopener noreferrer" className={`${className} whatsapp-btn`}>

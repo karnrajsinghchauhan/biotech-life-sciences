@@ -51,6 +51,7 @@ export default function ShopifyBuy({
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || "Could not add to cart")
       setAdded({ checkoutUrl: data.cart.checkoutUrl, count: data.cart.totalQuantity })
+      window.dispatchEvent(new CustomEvent("btls-cart-updated", { detail: { count: data.cart.totalQuantity } }))
     } catch (e) {
       setError((e as Error).message)
     } finally {
@@ -70,9 +71,10 @@ export default function ShopifyBuy({
           {variants.map((v) => {
             const on = v.id === selected?.id
             return (
-              <button
+                <button
                 key={v.id}
                 className="pill"
+                type="button"
                 onClick={() => { setSelected(v); setAdded(null) }}
                 disabled={!v.availableForSale}
                 aria-pressed={on}
@@ -118,7 +120,7 @@ export default function ShopifyBuy({
       {error && <div className="notice">{error}</div>}
 
       {added && (
-        <div className="verify-result ok">
+        <div className="verify-result ok" role="status" aria-live="polite">
           <span className="verify-status ok">
             <span className="verify-dot ok" aria-hidden="true">✓</span>
             Added — {added.count} item{added.count === 1 ? "" : "s"} in cart

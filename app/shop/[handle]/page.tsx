@@ -4,17 +4,17 @@ import Image from "next/image"
 import { notFound } from "next/navigation"
 import { getProduct, getShopInfo, isShopifyConfigured } from "@/lib/shopify"
 import ShopifyBuy from "@/components/ShopifyBuy"
-import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
 import Reveal from "@/components/Reveal"
-import { site } from "@/lib/config"
-import { bySlug } from "@/lib/data"
+import { isAnyVariantAvailable } from "@/lib/availability"
+import WhatsAppOrderButton from "@/components/WhatsAppOrderButton"
+import RuoNotice from "@/components/RuoNotice"
 
 export const revalidate = 300
 
 export async function generateMetadata({ params }: { params: { handle: string } }): Promise<Metadata> {
   if (!isShopifyConfigured()) return {}
-  const p = await getProduct(params.handle)
-  return p ? { title: p.title, description: p.description.slice(0, 155) } : {}
+  const product = await getProduct(params.handle)
+  return product ? { title: product.title, description: product.description.slice(0, 155) } : {}
 }
 
 export default async function ShopProductPage({ params }: { params: { handle: string } }) {
@@ -25,52 +25,47 @@ export default async function ShopProductPage({ params }: { params: { handle: st
 
   return (
     <>
-      <div className="container breadcrumb">
-        <Link href="/">Home</Link> / <Link href="/shop">Shop</Link> /{" "}
-        <span style={{ color: "var(--ink)" }}>{product.title}</span>
+      <div className="container breadcrumb minimal-breadcrumb">
+        <Link href="/shop">Shop</Link><span>/</span><strong>{product.title}</strong>
       </div>
 
-      <section className="section tight">
-        <div className="container split">
+      <section className="minimal-product-page">
+        <div className="container minimal-product-hero">
           <Reveal>
-            <div
-              className="vial-stage"
-              style={{
-                minHeight: 520, borderRadius: 20, border: "1px solid var(--line)",
-                background: "radial-gradient(120% 90% at 50% 20%, #24272e 0%, #101216 55%, #08090b 100%)",
-              }}
-            >
-              <span className="molecular-layer tr" aria-hidden="true" />
+            <div className="minimal-shopify-visual">
               {product.featuredImage ? (
                 <Image
-                  className="vial-img"
                   src={product.featuredImage.url}
                   alt={product.featuredImage.altText || `${product.title} research vial`}
                   width={product.featuredImage.width || 620}
                   height={product.featuredImage.height || 1343}
                   priority
-                  sizes="(max-width: 1024px) 70vw, 460px"
-                  style={{ height: 470 }}
+                  sizes="(max-width: 900px) 82vw, 46vw"
                 />
-              ) : (
-                <span className="small" style={{ zIndex: 2, alignSelf: "center" }}>No image supplied</span>
-              )}
+              ) : <span>Image unavailable</span>}
+              <small>Live catalogue / Shopify</small>
             </div>
           </Reveal>
 
           <Reveal delay={1}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-              <h1 style={{ fontSize: "clamp(30px,3.6vw,44px)" }}>{product.title}</h1>
-              {product.description && (
-                <p style={{ color: "var(--ink-2)", fontSize: 15.5 }}>{product.description}</p>
-              )}
-              <div className="card" style={{ padding: 22 }}>
+            <div className="minimal-buy-panel">
+              <span className="minimal-kicker">Research compound</span>
+              <h1>{product.title}</h1>
+              {product.description && <p className="minimal-product-summary">{product.description}</p>}
+
+              <div className="minimal-product-facts" aria-label="Purchase information">
+                <span><small>Availability</small>{isAnyVariantAvailable(product.variants) ? "In stock" : "Enquire"}</span>
+                <span><small>Cart</small>Persistent</span>
+                <span><small>Checkout</small>Shopify secured</span>
+              </div>
+
+              <div className="minimal-buy-card">
                 <ShopifyBuy variants={product.variants} currency={currency} />
               </div>
-              {bySlug(params.handle) && (
-                <WhatsAppOrderButton product={bySlug(params.handle)!} className="btn primary wide" />
-              )}
-              <div className="notice">{site.disclaimer}</div>
+
+              <WhatsAppOrderButton title={product.title} className="btn ghost wide" />
+
+              <RuoNotice />
             </div>
           </Reveal>
         </div>
