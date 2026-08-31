@@ -2,6 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import type { Metadata } from "next"
 import { articles, articleBySlug } from "@/lib/library"
+import { DIAGRAM_COMPONENTS } from "@/components/diagrams"
 
 export function generateStaticParams() {
   return articles.map((a) => ({ slug: a.slug }))
@@ -32,6 +33,10 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
               <p key={i}>{p}</p>
             ))}
           </div>
+          {a.diagram && DIAGRAM_COMPONENTS[a.diagram] && (() => {
+            const Diagram = DIAGRAM_COMPONENTS[a.diagram]
+            return <Diagram />
+          })()}
           <div className="notice" style={{ marginTop: 34 }}>
             This article is educational material about laboratory research practice. It is not medical advice,
             and no compound described here is supplied for human or veterinary use.

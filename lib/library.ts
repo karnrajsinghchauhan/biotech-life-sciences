@@ -5,6 +5,7 @@ export type Article = {
   minutes: number
   summary: string
   body: string[] // paragraphs
+  diagram?: string // key into components/diagrams/index.ts's DIAGRAM_COMPONENTS
 }
 
 export const articles: Article[] = [
@@ -13,6 +14,7 @@ export const articles: Article[] = [
     title: "What Are Research Peptides?",
     category: "Peptide Fundamentals", minutes: 6,
     summary: "Short chains of amino acids, and why they matter as laboratory research tools.",
+    diagram: "peptide-chain",
     body: [
       "Peptides are short chains of amino acids linked by peptide bonds — typically between 2 and 50 residues. They sit between single amino acids and full proteins in size, and they act as some of biology's most important signaling molecules: hormones, neurotransmitter modulators, host-defense molecules and growth-factor fragments are all peptides.",
       "Research peptides are synthetic versions of these molecules, manufactured by solid-phase peptide synthesis (SPPS) for use in laboratory research. They serve as reference materials in receptor-pharmacology studies, tools in cell-culture experiments, standards in analytical method development, and probes in preclinical models.",
@@ -25,6 +27,7 @@ export const articles: Article[] = [
     title: "How to Read a Certificate of Analysis",
     category: "COA Guide", minutes: 8,
     summary: "A field guide to the document that separates characterized material from unknown powder.",
+    diagram: "coa-anatomy",
     body: [
       "A Certificate of Analysis (COA) is a batch-specific document summarizing the analytical testing performed on a specific production lot. It is the single most important quality document in research-material supply, because it connects a physical vial — via its batch number — to measured data.",
       "Start with identity fields: product name, catalogue number and batch number. The batch number on the COA must match the batch number printed on your vial. A COA without a batch number, or one that doesn't match the product in hand, documents nothing.",
@@ -38,6 +41,7 @@ export const articles: Article[] = [
     title: "Understanding HPLC Purity Testing",
     category: "Laboratory Testing", minutes: 7,
     summary: "How reversed-phase chromatography produces the purity number on every peptide COA.",
+    diagram: "chromatogram",
     body: [
       "High-performance liquid chromatography (HPLC) separates the components of a mixture by pushing it, under pressure, through a column packed with fine particles. Components interact with the column material to different degrees and therefore emerge — elute — at different times.",
       "For peptides, the standard technique is reversed-phase HPLC: a hydrophobic column and a water/acetonitrile gradient. More hydrophobic species stick longer. A UV detector at the column outlet records absorbance over time, producing a chromatogram: a plot of peaks, each corresponding to a distinct component.",
@@ -50,6 +54,7 @@ export const articles: Article[] = [
     title: "Understanding Mass Spectrometry",
     category: "Laboratory Testing", minutes: 6,
     summary: "Why an observed mass is the strongest routine identity check for a synthetic peptide.",
+    diagram: "mass-spec",
     body: [
       "Mass spectrometry (MS) measures the mass-to-charge ratio of ionized molecules. For peptide identity work, the question it answers is simple: does the measured molecular mass match the theoretical mass calculated from the intended amino-acid sequence?",
       "Electrospray ionization (ESI-MS) is the most common approach for peptides. The sample is sprayed through a charged needle, producing multiply-charged ions whose spectrum can be deconvoluted into a single molecular mass, usually accurate to well under one dalton for research purposes.",
